@@ -12,22 +12,22 @@
         "introText": "<i>Casper Wortmann</i> works with computation, systems, and human interaction. With a background in artificial intelligence and performance-based practices, his work explores how algorithms shape experience, behaviour, and form. He develops interactive and real-time environments that combine machine learning, perception, and physical presence, often in collaboration with designers, performers, and institutions.",
         "detailText": "Looking for me? Find me on linkedin or give me a call.",
         "carousel1": [
-            "assets/about/solo-min.jpg",
-            "assets/about/imtheartist2.jpg",
-            "assets/about/dbf.jpg",
-            "assets/about/oerol-min.png",
-            "assets/about/dbf_004.jpeg",
-            "assets/about/isla.jpg",
-            "assets/about/dbf_006.jpeg",
-            "assets/about/cts.jpg",
+            "assets/about/solo-min.avif",
+            "assets/about/imtheartist2.avif",
+            "assets/about/dbf.avif",
+            "assets/about/oerol-min.avif",
+            "assets/about/dbf_004.avif",
+            "assets/about/isla.avif",
+            "assets/about/dbf_006.avif",
+            "assets/about/cts.avif",
             "assets/about/apollo.gif"
         ],
         "carousel2": [
-            "assets/about/mayaonsong_1b.png",
-            "assets/about/mayansong_2-min.png",
-            "assets/about/mayansong_3-min.png",
-            "assets/about/mayansong_4-min.png",
-            "assets/about/mayansong_5-min.png"
+            "assets/about/mayaonsong_1b.avif",
+            "assets/about/mayansong_2-min.avif",
+            "assets/about/mayansong_3-min.avif",
+            "assets/about/mayansong_4-min.avif",
+            "assets/about/mayansong_5-min.avif"
         ]
     },
     {
@@ -43,29 +43,29 @@
         "introText": "This interactive installation was developed for Ma Yansong: Architecture and Emotion at the Nieuwe Instituut in Rotterdam. The exhibition explored how architecture can move beyond function and efficiency to create emotional, sensory experiences, drawing on the work and philosophy of Ma Yansong and MAD Architects. <br><br>Central to the exhibition was the idea that architecture begins not with calculation, but with intuition, feeling, and an embodied relationship to nature and place.",
         "detailText": "Within this context, the AI Interactive Table invited visitors to take part in that first, often private moment of architectural creation: the sketch. Using a simple gestural drawing, visitors were encouraged to draw instinctively, without instruction or expectation of outcome. Their strokes were deliberately raw, imprecise, and expressive—echoing the emotional sketches through which Ma Yansong often initiates his designs. <br>An AI system, developed by Casper Wortmann and Thomas Groenewegen, interpreted these drawings in real time. Trained on visual material from MAD Architects' projects, the system analyzed the gestures, rhythms, and spatial tendencies of each sketch and translated them into an architectural interpretation. Moments later, the drawing reappeared as a speculative form on screen and online, bridging the gap between intuition and computation.",
         "carousel1": [
-            "assets/architecture/img_3694-min.jpg",
-            "assets/architecture/img01-min.jpg",
-            "assets/architecture/img_3711-min.jpg",
+            "assets/architecture/img_3694-min.avif",
+            "assets/architecture/img01-min.avif",
+            "assets/architecture/img_3711-min.avif",
             "assets/architecture/mayansongzoom2.mp4",
-            "assets/architecture/img_3786-min.jpg",
-            "assets/architecture/img_3716-min.jpg",
-            "assets/architecture/IMG_3778-min.jpg"
+            "assets/architecture/img_3786-min.avif",
+            "assets/architecture/img_3716-min.avif",
+            "assets/architecture/IMG_3778-min.avif"
         ],
         "carousel2": [
-            "assets/architecture/sketchgen01-min.png",
-            "assets/architecture/sketchgen01_im-min.jpeg",
-            "assets/architecture/sketchgen02-min.png",
-            "assets/architecture/sketchgen02_im-min.jpg",
-            "assets/architecture/sketchgen05-min.png",
-            "assets/architecture/sketchgen05_im-min.png",
-            "assets/architecture/sketchgen06-min.png",
-            "assets/architecture/sketchgen06_im-min.png",
-            "assets/architecture/sketchgen07-min.png",
-            "assets/architecture/sketchgen07_im-min.png",
-            "assets/architecture/sketchgen08-min.jpg",
-            "assets/architecture/sketchgen08_im-min.png",
-            "assets/architecture/sketchgen09.png",
-            "assets/architecture/sketchgen09_im.png"
+            "assets/architecture/sketchgen01-min.avif",
+            "assets/architecture/sketchgen01_im-min.avif",
+            "assets/architecture/sketchgen02-min.avif",
+            "assets/architecture/sketchgen02_im-min.avif",
+            "assets/architecture/sketchgen05-min.avif",
+            "assets/architecture/sketchgen05_im-min.avif",
+            "assets/architecture/sketchgen06-min.avif",
+            "assets/architecture/sketchgen06_im-min.avif",
+            "assets/architecture/sketchgen07-min.avif",
+            "assets/architecture/sketchgen07_im-min.avif",
+            "assets/architecture/sketchgen08-min.avif",
+            "assets/architecture/sketchgen08_im-min.avif",
+            "assets/architecture/sketchgen09.avif",
+            "assets/architecture/sketchgen09_im.avif"
         ]
     },
     {
@@ -81,33 +81,33 @@
         "introText": "Trash vs Maquette is a small research project developed alongside Architecture and Emotion. Instead of training a model on finished buildings, the system was fine-tuned on images of architectural process: workspaces, sketches, and provisional maquettes.",
         "detailText": "These images often show architecture before it becomes architecture. Quick constructions made from toothpicks, tape, plastic bags, or improvised materials — objects that never appear in the final building, yet quietly shape its direction. By including these materials, the model learns not only form, but intention: hesitation, urgency, and experimentation.<br><br>The resulting outputs sit somewhere between trash and maquette, reflecting how architectural ideas first take shape — fragile, speculative, and unresolved.",
         "carousel1": [
-            "assets/architecture-research/research_002.png",
-            "assets/architecture-research/research_003.jpeg",
-            "assets/architecture-research/research_001.png",
-            "assets/architecture-research/research_003.png",
-            "assets/architecture-research/research_007.jpg",
-            "assets/architecture-research/research_009.jpg",
-            "assets/architecture-research/research_014.jpg"
+            "assets/architecture-research/research_002.avif",
+            "assets/architecture-research/research_003.avif",
+            "assets/architecture-research/research_001.avif",
+            "assets/architecture-research/research_003.avif",
+            "assets/architecture-research/research_007.avif",
+            "assets/architecture-research/research_009.avif",
+            "assets/architecture-research/research_014.avif"
         ],
         "carousel2": [
-            "assets/architecture-research/research_016.jpg",
-            "assets/architecture-research/research_018.jpg",
-            "assets/architecture-research/research_019.jpg",
-            "assets/architecture-research/research_041.jpg",
-            "assets/architecture-research/research_081.jpg",
-            "assets/architecture-research/research_082.jpg",
-            "assets/architecture-research/research_094.jpg",
-            "assets/architecture-research/research_105.jpg",
-            "assets/architecture-research/research_112.jpg",
-            "assets/architecture-research/research_115.png",
-            "assets/architecture-research/toothpicks.jpg",
-            "assets/architecture-research/trash.jpeg"
+            "assets/architecture-research/research_016.avif",
+            "assets/architecture-research/research_018.avif",
+            "assets/architecture-research/research_019.avif",
+            "assets/architecture-research/research_041.avif",
+            "assets/architecture-research/research_081.avif",
+            "assets/architecture-research/research_082.avif",
+            "assets/architecture-research/research_094.avif",
+            "assets/architecture-research/research_105.avif",
+            "assets/architecture-research/research_112.avif",
+            "assets/architecture-research/research_115.avif",
+            "assets/architecture-research/toothpicks.avif",
+            "assets/architecture-research/trash.avif"
         ]
     },
     {
         "id": "brothers",
         "title": "Brothers",
-        "heroImage": "assets/brothers/broedersim02.png",
+        "heroImage": "assets/brothers/broedersim02.avif",
         "meta": {
             "about": "Robotic choreography",
             "year": "2021-2024",
@@ -118,15 +118,15 @@
         "detailText": "By placing singing bodies alongside large industrial machines, the work addresses questions of labour, endurance, and replaceability. The juxtaposition of human voice and automated movement reflects on the legacy of the labour movement and the position of workers in an increasingly automated global economy. The performance is accompanied by an exhibition and film works that further explore the lived experiences behind the system. <br> I was involved in the creative and technical side of this project. This includes development and execution of the movements and behaviour of the machines within the performance.",
         "carousel1": [
             "assets/brothers/broedersim01.avif",
-            "assets/brothers/broedersim02.png",
-            "assets/brothers/broedersim07.png",
-            "assets/brothers/broedersim03.png"
+            "assets/brothers/broedersim02.avif",
+            "assets/brothers/broedersim07.avif",
+            "assets/brothers/broedersim03.avif"
         ],
         "carousel2": [
             "assets/brothers/broedersgifkort.gif",
-            "assets/brothers/broedersim04.png",
-            "assets/brothers/broedersim05.png",
-            "assets/brothers/broedersim06.png"
+            "assets/brothers/broedersim04.avif",
+            "assets/brothers/broedersim05.avif",
+            "assets/brothers/broedersim06.avif"
         ]
     },
     {
@@ -142,21 +142,21 @@
         "introText": "<i>Grond</i> is a quick research project into video generation.",
         "detailText": "Made using Framepack-f1.",
         "carousel1": [
-            "assets/grond/grond02.png",
+            "assets/grond/grond02.avif",
             "assets/grond/grondje.mp4",
-            "assets/grond/grond04.jpg"
+            "assets/grond/grond04.avif"
         ],
         "carousel2": [
-            "assets/grond/grond04.jpg",
-            "assets/grond/grond05.png",
-            "assets/grond/grond06b.png",
+            "assets/grond/grond04.avif",
+            "assets/grond/grond05.avif",
+            "assets/grond/grond06b.avif",
             "assets/grond/grondmachine.mp4"
         ]
     },
     {
         "id": "lollipop",
         "title": "Dear Lollipop",
-        "heroImage": "assets/lollipop/prins.png",
+        "heroImage": "assets/lollipop/prins.avif",
         "meta": {
             "about": "Artwork to be observed by phones",
             "year": "2019",
@@ -166,22 +166,22 @@
         "introText": "In the autumn of 2019 something unique happened in a theatre in Hasselt, Belgium. Seven human performers gave a theatrical performance, filled with nerves, effort and exhaustion. They ran, fell, argued, doubted themselves, and sometimes felt they were truly in the moment. They did everything they could to create a performance like any other performance.<br><br> Yet their audience was anything but ordinary: the seats in the auditorium were filled entirely with smartphones.",
         "detailText": "These smartphones did not arrive on their own. Before the show, their owners (the human audience) were asked to install an app: Dear Lollipop. Through this app, the phones watched the entire performance by themselves. Each phone formed its own opinion, sometimes recording, sometimes dozing off. In that sense, this smartphone audience behaved much like a human one.<br><br>After placing their phones in the auditorium, the humans were sent to a waiting room. There, they waited together while their phones watched the show. Via a livestream they could see their phones sitting quietly in their seats, watching without being touched.<br><br>Without their phones, the humans were left with each other. With nothing to distract them, they might even have started talking. After all, isn’t that what theatre is for?<br><br>After an hour, the humans retrieved their phones. For the next 14 days, the smartphones would share fragments of their theatre experience: memories, videoclips, comments, and associations. Each phone had its own unique perspective. After those 14 days, everything disappeared, waiting for the next performance.<br><br>DEAR LOLLIPOP reflects on the place smartphones occupy in our lives. Technology reshapes how we connect, how we wait, and how we share space. The work asks what it feels like to be together without our devices, and how intelligent and autonomous a smartphone has become. Is it catching up with its owner?<br><br>The project started from the idea that technological progress should not be avoided, but examined. Considering the rapid evolution of smartphones, the idea that they could watch theatre is not far-fetched. Not long ago, face recognition itself seemed impossible. Why would theatre for phones be absurd?<br><br>DEAR LOLLIPOP — named after the Android 5.0 operating system — was conceived before the Covid-19 lockdowns. In a time of social distancing, our longing for physical contact increased, while our intimacy with digital devices intensified. Reality seemed to catch up with the concept. In this performance, the phones see everything, while humans see nothing directly. They only glimpse the experience through their devices, creating a strange exclusivity: a show without humans present.<br><br>This exclusivity also creates discomfort. Allowing phones access to our private lives feels normal, but granting them exclusive access to art feels different. Waiting for your phone to complete an experience normally reserved for you becomes a quietly unsettling, yet intriguing act.",
         "carousel1": [
-            "assets/lollipop/lolliperf1.jpg",
-            "assets/lollipop/lolliperf2.jpg",
-            "assets/lollipop/lolliperf3.jpg",
-            "assets/lollipop/lolliperf4.jpg"
+            "assets/lollipop/lolliperf1.avif",
+            "assets/lollipop/lolliperf2.avif",
+            "assets/lollipop/lolliperf3.avif",
+            "assets/lollipop/lolliperf4.avif"
         ],
         "carousel2": [
-            "assets/lollipop/lolliperf5.jpg",
-            "assets/lollipop/lolliperf6.jpg",
-            "assets/lollipop/artistictastefront.jpg",
-            "assets/lollipop/artistictastecredits.jpg"
+            "assets/lollipop/lolliperf5.avif",
+            "assets/lollipop/lolliperf6.avif",
+            "assets/lollipop/artistictastefront.avif",
+            "assets/lollipop/artistictastecredits.avif"
         ]
     },
     {
         "id": "dbf",
         "title": "Dear Beloved Friend,",
-        "heroImage": "assets/dbf/dbf_010.jpg",
+        "heroImage": "assets/dbf/dbf_010.avif",
         "meta": {
             "about": "Live connection to Lagos, Nigeria",
             "year": "2023",
@@ -191,24 +191,24 @@
         "introText": "Visitors of European theaters watch a film that is created live, at the moment of screening, in Nollywood, Lagos, Nigeria. Film actors and theatergoers are directly linked through a live online connection.<br><br>In the film, we see how a group of Nigerian actors debunk the caricature of the helpless African refugee. In a refined satire, they turn around the long history of stereotyping and put the European self-image under scrutiny. With a webcam, they study the theatergoers, whom they portray in the film as insecure old powerholders—people navigating between maintaining their own comfort and patronizing the African continent.",
         "detailText": "<i>Dear beloved friend,</i> won a Golden Calf, the Dutch film awards, during the Gala of the Dutch Film Festival. Dear beloved friend, won in the Best Digital Culture Production 2023 category.<br><br>The jury writes:<br>“<i>The interactive theater performance Dear beloved friend, takes the viewer via a live internet connection from Nollywood on a compelling and confrontational story in which the archetypal Western view of Africa is contrasted with Africa’s perspective on Europe. With a camera in the middle of the stage as a two-way portal to that other part of the world, the fourth wall is broken down and the digital way of communication is used as a means to bring different worlds together. The digital infrastructure of the internet and livestream is used inventively to create new forms of making, showing and experiencing a work</i>.",
         "carousel1": [
-            "assets/dbf/dbf_014.jpeg",
-            "assets/dbf/dbf_012.jpg",
-            "assets/dbf/dbf_015.jpg",
-            "assets/dbf/dbf_010.jpg"
+            "assets/dbf/dbf_014.avif",
+            "assets/dbf/dbf_012.avif",
+            "assets/dbf/dbf_015.avif",
+            "assets/dbf/dbf_010.avif"
         ],
         "carousel2": [
-            "assets/dbf/dbf_004.jpeg",
-            "assets/dbf/dbf_005.jpeg",
-            "assets/dbf/dbf_006.jpeg",
-            "assets/dbf/dbf_007.jpeg",
-            "assets/dbf/dbf_008.jpeg",
-            "assets/dbf/dbf_009.jpeg"
+            "assets/dbf/dbf_004.avif",
+            "assets/dbf/dbf_005.avif",
+            "assets/dbf/dbf_006.avif",
+            "assets/dbf/dbf_007.avif",
+            "assets/dbf/dbf_008.avif",
+            "assets/dbf/dbf_009.avif"
         ]
     },
     {
         "id": "calling-the-shots",
         "title": "Calling The Shots",
-        "heroImage": "assets/cts/cts_clean.jpg",
+        "heroImage": "assets/cts/cts_clean.avif",
         "meta": {
             "about": "Live table tennis tracking",
             "year": "2024",
@@ -225,11 +225,11 @@
             "assets/cts/field_IBM_calling_the_shots_image_09.avif"
         ],
         "carousel2": [
-            "assets/cts/DSC00177.jpg",
-            "assets/cts/DSC00175.jpg",
-            "assets/cts/DSC00177.jpg",
-            "assets/cts/DSC00309.jpg",
-            "assets/cts/DSC00391.jpg"
+            "assets/cts/DSC00177.avif",
+            "assets/cts/DSC00175.avif",
+            "assets/cts/DSC00177.avif",
+            "assets/cts/DSC00309.avif",
+            "assets/cts/DSC00391.avif"
         ]
     },
     {
@@ -245,13 +245,13 @@
         "introText": "Sevilla is an interactive foosball installation that uses play as its primary interface. Without instruction or visible technology, participants engage in a familiar game while an underlying system observes patterns of movement, decision-making, and collaboration. <br>Can we use AI to analyze <i>how</i> you play?",
         "detailText": "A custom-trained AI model analyses how people play foosball — not in terms of winning or losing, but through style, rhythm, and interaction with others. From these observations, the system identifies relationships between players, suggesting affinities, contrasts, and potential learning dynamics.<br><br>The installation pairs participants with an ideal teammate, a difficult opponent, or someone whose playing style differs from their own. In doing so, Sevilla reflects on how behavioural data can reveal intention, cooperation, and strategy, while keeping the technology itself largely out of sight.",
         "carousel1": [
-            "assets/sevilla/field_IBM_sevilla_image_01.png",
-            "assets/sevilla/field_IBM_sevilla_image_02.png",
-            "assets/sevilla/field_IBM_sevilla_image_06.png",
+            "assets/sevilla/field_IBM_sevilla_image_01.avif",
+            "assets/sevilla/field_IBM_sevilla_image_02.avif",
+            "assets/sevilla/field_IBM_sevilla_image_06.avif",
             "assets/sevilla/field_IBM_sevilla_video_01.mp4"
         ],
         "carousel2": [
-            "assets/sevilla/sevilla_fc_vis.jpg",
+            "assets/sevilla/sevilla_fc_vis.avif",
             "assets/sevilla/field_IBM_sevilla_image_03.avif",
             "assets/sevilla/sevilla.webm"
         ]
@@ -307,17 +307,17 @@
         "introText": "Not everything fits neatly into a single category. Alongside the projects shown here, I work across a wide range of formats and contexts. With a Master’s degree in Artificial Intelligence and an art degree, I move between hardcore machine learning, hands-on technical work, and collaborative artistic projects — often driven by curiosity rather than a fixed brief.",
         "detailText": "This includes full projects in technical machine learning and engineering roles, as well as theatre and live performance works (link, link, link), websites and digital experiences (link), and a collection of projects that sit somewhere between disciplines.<br><br>Over the years this has included caring for and operating a humanoid robot (link), building a custom sound system with 40 wirelessly connected speakers that respond to the collective heartbeat of people in a room, producing video installations, and developing interactive systems and interfaces. These are complete works, gathered here rather than expanded into separate project pages.<br><br>Together, they form an ongoing practice: using technology as material, not just as a tool — and allowing projects to take the form that suits them, rather than the structure of a website.",
         "carousel1": [
-            "assets/other/oprah.jpg",
-            "assets/other/zuurstof.jpg",
-            "assets/other/concretevoices.jpg",
-            "assets/other/entermedea.jpg",
-            "assets/other/happiness.jpg",
-            "assets/other/kunstnatuurramp-min.png",
-            "assets/other/odette_58.jpg"
+            "assets/other/oprah.avif",
+            "assets/other/zuurstof.avif",
+            "assets/other/concretevoices.avif",
+            "assets/other/entermedea.avif",
+            "assets/other/happiness.avif",
+            "assets/other/kunstnatuurramp-min.avif",
+            "assets/other/odette_58.avif"
         ],
         "carousel2": [
             "assets/other/caspereye.mp4",
-            "assets/other/happiness_2.jpg"
+            "assets/other/happiness_2.avif"
         ]
     }
 ]
