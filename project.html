@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail</title>
+    <style>
+        /* ... PASTE YOUR EXISTING CSS HERE ... */
+
+        /* Keep all your CSS exactly as it is */
+        :root {
+            --bg-color: #050505;
+            --text-color: #f0f0f0;
+            --accent: #333;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: zoomOut 1.5s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+            filter: brightness(0.6);
+        }
+
+        @keyframes zoomOut {
+            from {
+                transform: scale(1.1);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .hero-title {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            font-size: 8vw;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 0.9;
+            color: white;
+            opacity: 0;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .meta-item h3 {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-item p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0;
+        }
+
+        .description-section {
+            padding: 4rem 5%;
+            max-width: 900px;
+        }
+
+        .ai-text {
+            font-size: 2rem;
+            line-height: 1.4;
+            min-height: 20rem;
+        }
+
+        .ai-text-secondary {
+            font-size: 1.5rem;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 2rem;
+            background: white;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hidden-source {
+            opacity: 0;
+            position: absolute;
+            z-index: -100;
+            pointer-events: none;
+            white-space: normal;
+        }
+
+        .text-block {
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+            margin-bottom: 1.5rem;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .text-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-section {
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid #111;
+            border-bottom: 1px solid #111;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 4rem;
+            padding: 0 5%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 2rem;
+            overflow-y: hidden;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* .carousel-img {
+            min-width: 60vw;
+            height: 70vh;
+            object-fit: cover;
+            background: #111;
+            opacity: 0;
+            transform: scale(0.8);
+        } */
+
+        .carousel-img {
+            min-width: 60vw;
+            height: 70vh;
+            object-fit: cover;
+            /* Crucial for videos to fill the box without stretching */
+            background: #111;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        @media (orientation: landscape) {
+            .carousel-img {
+                min-width: 35vw;
+                height: 80vh;
+            }
+        }
+
+        @media (orientation: portrait) {
+            .carousel-img {
+                min-width: 90vw;
+                height: 60vh;
+            }
+
+            .carousel-track {
+                gap: 1rem;
+            }
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 5%;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid white;
+            color: white;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .next-project {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid var(--accent);
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            font-size: 4vw;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 800;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .next-link:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <img src="" class="hero-img" id="hero-img">
+        <h1 class="hero-title" id="main-title"></h1>
+    </header>
+
+    <section class="meta-grid">
+        <div class="meta-item">
+            <h3>About</h3>
+            <p class="scramble-target" id="meta-about"></p>
+        </div>
+        <div class="meta-item">
+            <h3>Year</h3>
+            <p class="scramble-target" id="meta-year"></p>
+        </div>
+        <div class="meta-item">
+            <h3>Type</h3>
+            <p class="scramble-target" id="meta-type"></p>
+        </div>
+        <div class="meta-item">
+            <h3>Location</h3>
+            <p class="scramble-target" id="meta-location"></p>
+        </div>
+    </section>
+
+    <section class="description-section">
+        <div class="ai-text" id="typewriter-intro"></div>
+        <div id="raw-intro" class="hidden-source"></div>
+    </section>
+
+    <section class="carousel-section">
+        <div class="carousel-track" id="track-1">
+        </div>
+    </section>
+
+    <section class="description-section">
+        <div class="ai-text ai-text-secondary" id="typewriter-detail"></div>
+        <div id="raw-detail" class="hidden-source"></div>
+    </section>
+
+    <section class="carousel-section">
+        <div class="carousel-track" id="track-2">
+        </div>
+    </section>
+
+    <div class="next-project">
+        <a href="#" class="next-link" id="next-project-link">Next Project -></a>
+    </div>
+
+    <script>
+        // --- ANIMATION FUNCTIONS (Your existing code) ---
+        // (I kept these exactly the same, just collapsed for brevity)
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+
+        function scrambleReveal(element, finalText, duration = 1500) {
+            if (!finalText) return;
+            let iteration = 0;
+            const length = finalText.length;
+            const intervalTime = 30;
+            const totalFrames = duration / intervalTime;
+            element.style.opacity = 1;
+            const interval = setInterval(() => {
+                element.innerText = finalText.split("").map((l, i) => {
+                    if (i < iteration) return finalText[i];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                }).join("");
+                iteration += length / totalFrames;
+                if (iteration >= length) {
+                    clearInterval(interval);
+                    element.innerText = finalText;
+                }
+            }, intervalTime);
+        }
+
+        function typeWriterIntro(targetId, textId, speed = 20) {
+            const target = document.getElementById(targetId);
+            const rawSource = document.getElementById(textId);
+            if (!target || !rawSource) return;
+
+            let cleanText = rawSource.innerHTML;
+            cleanText = cleanText.replace(/<br\s*\/?>/gi, '§');
+            cleanText = cleanText.replace(/<i\b[^>]*>/gi, '↑');
+            cleanText = cleanText.replace(/<\/i>/gi, '↓');
+            cleanText = cleanText.replace(/(\r\n|\n|\r)/gm, " ").replace(/\s+/g, ' ').trim();
+
+            let i = 0;
+            let hasStarted = false;
+            let currentItalic = null;
+
+            const cursor = document.createElement('span');
+            cursor.className = 'cursor';
+            target.appendChild(cursor);
+
+            function type() {
+                const char = cleanText.charAt(i);
+                if (char === '§') {
+                    const br = document.createElement('br');
+                    if (currentItalic) currentItalic.appendChild(br); else cursor.before(br);
+                } else if (char === '↑') {
+                    currentItalic = document.createElement('i');
+                    cursor.before(currentItalic);
+                } else if (char === '↓') {
+                    currentItalic = null;
+                } else {
+                    if (currentItalic) currentItalic.textContent += char;
+                    else cursor.before(char);
+                }
+                i++;
+                if (i < cleanText.length) {
+                    const isMarker = (char === '§' || char === '↑' || char === '↓');
+                    setTimeout(type, isMarker ? 0 : speed + (Math.random() * 15));
+                } else { cursor.style.display = 'none'; }
+            }
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !hasStarted) { hasStarted = true; type(); observer.disconnect(); }
+            }, { threshold: 0.1 });
+            observer.observe(target);
+        }
+
+        function revealTextBlocks(targetId, textId) {
+            const target = document.getElementById(targetId);
+            const rawSource = document.getElementById(textId);
+            if (!target || !rawSource) return;
+            let rawHTML = rawSource.innerHTML.replace(/(\r\n|\n|\r)/gm, "");
+            const blocks = rawHTML.split(/<br\s*\/?>/gi).filter(txt => txt.trim().length > 0);
+            blocks.forEach(blockContent => {
+                const p = document.createElement('div');
+                p.className = 'text-block';
+                p.innerHTML = blockContent.trim();
+                target.appendChild(p);
+            });
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    target.querySelectorAll('.text-block').forEach((child, index) => {
+                        setTimeout(() => { child.classList.add('visible'); }, index * 200);
+                    });
+                    observer.disconnect();
+                }
+            }, { threshold: 0.1 });
+            observer.observe(target);
+        }
+
+        const flyInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translate(0, 0) scale(1)';
+                    flyInObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        // --- NEW: FETCH AND POPULATE LOGIC ---
+        async function loadProject() {
+            // 1. Get Project ID
+            const params = new URLSearchParams(window.location.search);
+            const projectId = params.get('id');
+
+            if (!projectId) {
+                console.error("No project ID found in URL");
+                return;
+            }
+
+            // --- HELPER: Handles the Image vs Video logic + Cross-Browser Support ---
+            const createMediaElement = (src, className, isHero = false) => {
+                const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
+
+                if (isVideo) {
+                    const vid = document.createElement('video');
+                    vid.className = className;
+                    if (isHero) vid.id = 'hero-img'; // Keep ID for hero
+
+                    vid.autoplay = true;
+                    vid.loop = true;
+                    vid.muted = true;
+                    vid.playsInline = true; // Crucial for Safari/iOS
+
+                    // SMART SOURCE LOADING
+                    // 1. Remove the extension (.mp4 or .webm)
+                    const basePath = src.substring(0, src.lastIndexOf('.'));
+
+                    // 2. Add MP4 Source (Safari prefers this usually)
+                    const sourceMp4 = document.createElement('source');
+                    sourceMp4.src = basePath + ".mp4";
+                    sourceMp4.type = "video/mp4";
+                    vid.appendChild(sourceMp4);
+
+                    // 3. Add WebM Source (Chrome prefers this usually)
+                    const sourceWebm = document.createElement('source');
+                    sourceWebm.src = basePath + ".webm";
+                    sourceWebm.type = "video/webm";
+                    vid.appendChild(sourceWebm);
+
+                    return vid;
+                } else {
+                    // It's just an image
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.className = className;
+                    if (isHero) img.id = 'hero-img';
+                    return img;
+                }
+            };
+
+            // 2. Fetch the JSON Database
+            try {
+                const response = await fetch('data.json');
+                const projects = await response.json();
+
+                // 3. Find current project
+                const projectIndex = projects.findIndex(p => p.id === projectId);
+                const project = projects[projectIndex];
+
+                if (!project) {
+                    document.body.innerHTML = "<h1>Project Not Found</h1>";
+                    return;
+                }
+
+                // 4. Determine Next Project
+                const nextIndex = (projectIndex + 1) % projects.length;
+                const nextProject = projects[nextIndex];
+
+                // 5. Populate HTML Elements
+                document.title = project.title + " - Portfolio";
+                document.getElementById('main-title').innerText = project.title;
+
+                // --- HERO MEDIA LOGIC ---
+                const existingHero = document.getElementById('hero-img');
+                const newHero = createMediaElement(project.heroImage, 'hero-img', true);
+
+                // Replace the placeholder image with our new smart element
+                existingHero.parentNode.replaceChild(newHero, existingHero);
+
+                document.getElementById('meta-about').innerText = project.meta.about;
+                document.getElementById('meta-year').innerText = project.meta.year;
+                document.getElementById('meta-type').innerText = project.meta.type;
+                document.getElementById('meta-location').innerText = project.meta.location;
+
+                document.getElementById('raw-intro').innerHTML = project.introText;
+                document.getElementById('raw-detail').innerHTML = project.detailText;
+
+                // 6. Build Carousels (Updated for Mixed Media)
+                const buildCarousel = (trackId, mediaItems) => {
+                    const track = document.getElementById(trackId);
+
+                    mediaItems.forEach(src => {
+                        // Use our helper to create the element
+                        const mediaElement = createMediaElement(src, 'carousel-img fly-in');
+
+                        // Add random initial transform for the fly-in effect
+                        const randomX = (Math.random() - 0.5) * 200;
+                        const randomY = 100 + Math.random() * 100;
+                        mediaElement.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
+
+                        track.appendChild(mediaElement);
+                        flyInObserver.observe(mediaElement);
+                    });
+                };
+
+                if (project.carousel1) buildCarousel('track-1', project.carousel1);
+                if (project.carousel2) buildCarousel('track-2', project.carousel2);
+
+                // 7. Set Next Project Link
+                const link = document.getElementById('next-project-link');
+                link.innerText = "Next: " + nextProject.title + " ->";
+                link.href = `project.html?id=${nextProject.id}`;
+
+                // 8. TRIGGER ANIMATIONS
+                setTimeout(() => {
+                    scrambleReveal(document.getElementById('main-title'), project.title, 2000);
+                }, 500);
+
+                const metas = document.querySelectorAll('.scramble-target');
+                metas.forEach((meta, index) => {
+                    setTimeout(() => {
+                        scrambleReveal(meta, meta.innerText, 800);
+                    }, 800 + (index * 200));
+                });
+
+                typeWriterIntro('typewriter-intro', 'raw-intro', 10);
+                revealTextBlocks('typewriter-detail', 'raw-detail');
+
+            } catch (error) {
+                console.error("Error loading project data:", error);
+            }
+        }
+
+        // Initialize
+        loadProject();
+    </script>
+</body>
+
+</html>

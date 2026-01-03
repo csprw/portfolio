@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casper Wortmann - Portfolio</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Helvetica Neue', sans-serif;
+            transition: background-color 0.8s ease, color 0.8s ease;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
+        }
+
+        body {
+            height: 850vh;
+        }
+
+        .fixed-viewport {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1;
+            perspective: 1000px;
+        }
+
+        /* --- NAME STYLES --- */
+        .name-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .word {
+            display: flex;
+        }
+
+        .char-wrap {
+            display: inline-block;
+            overflow: visible;
+            opacity: 0;
+            transform: translateY(60px);
+            animation: slideUpFade 1s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+        }
+
+        .char {
+            display: inline-block;
+            font-size: 8vw;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1;
+            will-change: transform, opacity, filter, color;
+            transition: color 0.8s ease;
+        }
+
+        .char-wrap:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .char-wrap:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .char-wrap:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .char-wrap:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .char-wrap:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        .char-wrap:nth-child(6) {
+            animation-delay: 0.35s;
+        }
+
+        .char-wrap:nth-child(7) {
+            animation-delay: 0.4s;
+        }
+
+        .char-wrap:nth-child(8) {
+            animation-delay: 0.45s;
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- PROJECT GALLERY STYLES --- */
+        .project-gallery {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .project-card {
+            position: absolute;
+            width: 350px;
+            height: 500px;
+            background-color: #222;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            will-change: transform;
+            cursor: pointer;
+            /* Change cursor to indicate clickable */
+        }
+
+        .project-card img,
+        .project-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            pointer-events: none;
+            /* Let clicks pass to the card div */
+        }
+
+        .project-card:hover img,
+        .project-card:hover video {
+            transform: scale(1.05);
+            opacity: 0.6;
+        }
+
+        .card-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            pointer-events: none;
+            color: white;
+            mix-blend-mode: difference;
+            opacity: 0;
+            animation: fadeInText 1s 0.8s forwards;
+            transition: opacity 0.3s;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* --- TRANSITION ANIMATION STYLES --- */
+
+        /* The Clone Image that flies to full screen */
+        .transition-clone {
+            position: fixed;
+            z-index: 9999;
+            object-fit: cover;
+            transform-origin: center center;
+            transition: all 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            /* Removes shadow during flight */
+        }
+
+        /* Class added to body to hide everything else */
+        .is-transitioning .fixed-viewport,
+        .is-transitioning .content {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+
+        @media (max-width: 768px) {
+            .char {
+                font-size: 14vw;
+            }
+
+            .project-card {
+                width: 70vw;
+                height: 90vw;
+            }
+
+            .name-container {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        .content {
+            position: relative;
+            top: 850vh;
+            background: #000;
+            color: white;
+            padding: 4rem 2rem;
+            min-height: 50vh;
+            z-index: 20;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fixed-viewport">
+
+        <div class="name-container">
+            <div class="word">
+                <span class="char-wrap"><span class="char" data-speed="3.5">C</span></span>
+                <span class="char-wrap"><span class="char" data-speed="-2.0">a</span></span>
+                <span class="char-wrap"><span class="char" data-speed="4.0">s</span></span>
+                <span class="char-wrap"><span class="char" data-speed="-1.0">p</span></span>
+                <span class="char-wrap"><span class="char" data-speed="2.0">e</span></span>
+                <span class="char-wrap"><span class="char" data-speed="-3.0">r</span></span>
+            </div>
+            <div class="word" style="margin-left: 2rem;">
+                <span class="char-wrap"><span class="char" data-speed="-2.0">W</span></span>
+                <span class="char-wrap"><span class="char" data-speed="3.0">o</span></span>
+                <span class="char-wrap"><span class="char" data-speed="-1.0">r</span></span>
+                <span class="char-wrap"><span class="char" data-speed="2.5">t</span></span>
+                <span class="char-wrap"><span class="char" data-speed="-3.5">m</span></span>
+                <span class="char-wrap"><span class="char" data-speed="1.5">a</span></span>
+                <span class="char-wrap"><span class="char" data-speed="-0.5">n</span></span>
+                <span class="char-wrap"><span class="char" data-speed="4.0">n</span></span>
+            </div>
+        </div>
+
+        <div class="project-gallery">
+
+            <div class="project-card" data-href="project.html?id=about" data-speed="0.9"
+                style="top: 140vh; right: 5%; width: 300px; height: 400px; z-index: -1;">
+                <!-- <img src="assets/about/casp_1000.gif"> -->
+                <video autoplay muted playsinline>
+                    <source src="assets/about/face_mesh_output.webm" type="video/webm">
+                    <source src="assets/about/face_mesh_output.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">About</div>
+            </div>
+
+            <div class="project-card" data-href="project.html?id=architecture" data-speed="1.2"
+                style="top: 120vh; left: 20%; width: 500px; height: 350px;">
+                <!-- <img src="assets/architecture/vid01.gif"> -->
+                <video autoplay muted playsinline>
+                    <source src="assets/architecture/mayansongzoom2.webm" type="video/webm">
+                    <source src="assets/architecture/mayansongzoom2.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">Architecture<br>and<br>Emotion</div>
+            </div>
+
+            <!-- <div class="project-card" data-href="project.html?id=lollipop" data-speed="0.7"
+                style="top: 335vh; left: 40%; width: 200px; height: 290px; z-index: 1;">
+                <img src="assets/lollipop/prins.png">
+                <div class="card-text">Dear<br>Lollipop</div>
+            </div> -->
+
+            <div class="project-card" data-href="project.html?id=lollipop" data-speed="1.1"
+                style="top: 475vh; left: 5%; width: 230px; height: 300px; z-index: -1;">
+                <!-- <video autoplay loop muted playsinline>
+                    <source src="assets/sevilla/sevilla.webm" type="video/webm">
+                    <source src="assets/sevilla/sevilla.mp4" type="video/mp4">
+                </video> -->
+                <img src="assets/lollipop/prins.png">
+                <div class="card-text">Dear<br>Lollipop</div>
+            </div>
+
+
+            <div class="project-card" data-href="project.html?id=dbf" data-speed="1.0"
+                style="top: 295vh; right: 15%; width: 500px; height: 380px;">
+                <img src="assets/dbf/dbf_010.jpg">
+                <div class="card-text">Dear<br>Beloved<br>Friend</div>
+            </div>
+            <div class="project-card" data-href="project.html?id=brothers" data-speed="1.4"
+                style="top: 270vh; left: 10%; width: 380px; height: 500px;">
+                <!-- <img src="assets/brothers/broedersgifkort.gif"> -->
+                <video autoplay loop muted playsinline>
+                    <source src="assets/brothers/broedersgifkort.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">Brothers</div>
+            </div>
+
+
+            <div class="project-card" data-href="project.html?id=grond" data-speed="1.2"
+                style="top: 295vh; left: 20%; width: 450px; height: 300px;">
+                <!-- <img src="assets/grond/grond03.gif"> -->
+                <video autoplay loop muted playsinline>
+                    <source src="assets/grond/grondje.webm" type="video/webm">
+                    <source src="assets/grond/grondje.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">Grond</div>
+            </div>
+
+            <div class="project-card" data-href="project.html?id=calling-the-shots" data-speed="1.4"
+                style="top: 480vh; left: 5%; width: 380px; height: 300px; z-index: -1;">
+                <img src="assets/cts/field_IBM_calling_the_shots_image_02.avif">
+                <div class="card-text">Calling<br>The<br>Shots</div>
+            </div>
+
+            <div class="project-card" data-href="project.html?id=architecture-research" data-speed="0.9"
+                style="top: 350vh; right: 5%; width: 300px; height: 400px; z-index: -1;">
+                <img src="assets/architecture-research/research_001.png">
+                <div class="card-text">Trash<br>vs<br>Maquette</div>
+            </div>
+
+            <!-- <div class="project-card" data-href="project.html?id=sevilla" data-speed="1.1"
+                style="top: 435vh; left: 5%; width: 300px; height: 200px; z-index: -1;">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/sevilla/sevilla.webm" type="video/webm">
+                    <source src="assets/sevilla/sevilla.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">Sevilla</div>
+            </div> -->
+
+            <div class="project-card" data-href="project.html?id=sevilla" data-speed="0.7"
+                style="top: 350vh; left: 40%; width: 300px; height: 200px; z-index: -2;">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/sevilla/sevilla.webm" type="video/webm">
+                    <source src="assets/sevilla/sevilla.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">Sevilla</div>
+            </div>
+
+            <div class="project-card" data-href="project.html?id=dreaming-computer" data-speed="1.11"
+                style="top: 570vh; right: 5%; width: 500px; height: 300px; z-index: -2;">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/dreaming-computer/dream01.webmp" type="video/webm">
+                    <source src="assets/dreaming-computer/dream01.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">Dreaming<br>Computer</div>
+            </div>
+
+            <div class="project-card" data-href="project.html?id=other" data-speed="0.9"
+                style="top: 540vh; left: 15%; width: 300px; height: 400px; z-index: -3;">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/other/other02.webm" type="video/webm">
+                    <source src="assets/other/other02.mp4" type="video/mp4">
+                </video>
+                <div class="card-text">Other<br>Projects</div>
+            </div>
+
+            <div class="project-card" data-href="project.html?id=oxygendepth" data-speed="1.25"
+                style="top: 680vh; right: 15%; width: 200px; height: 300px; z-index: -2;">
+                <img src="assets/zuurstof/zuurstof.jpg">
+                <div class="card-text">Oxygen<br>Depth</div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="content">
+        <h2>Casper Wortmann</h2>
+    </section>
+
+    <script>
+        const chars = document.querySelectorAll('.char');
+        const projects = document.querySelectorAll('.project-card');
+        const body = document.body;
+        let isTransitioning = false; // Flag to stop scroll math when clicking
+
+        // --- SCROLL LOGIC ---
+        window.addEventListener('scroll', () => {
+            if (isTransitioning) return; // Stop updates if we are leaving
+
+            const scrollY = window.scrollY;
+            const screenH = window.innerHeight;
+
+            // 1. Color Flip
+            if (scrollY > screenH * 0.2) {
+                body.style.backgroundColor = '#000000';
+                body.style.color = '#ffffff';
+                chars.forEach(char => char.style.color = '#ffffff');
+            } else {
+                body.style.backgroundColor = '#ffffff';
+                body.style.color = '#000000';
+                chars.forEach(char => char.style.color = '#000000');
+            }
+
+            // 2. Name Explode
+            chars.forEach(char => {
+                const speed = parseFloat(char.getAttribute('data-speed'));
+                const yPos = scrollY * speed * 0.35;
+                const dist = Math.abs(yPos);
+                const opacity = 1 - Math.min(dist / 500, 1);
+                const blur = Math.min(dist / 50, 10);
+                char.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                char.style.opacity = opacity;
+                char.style.filter = `blur(${blur}px)`;
+            });
+
+            // 3. Projects Fly
+            projects.forEach(card => {
+                const speed = parseFloat(card.getAttribute('data-speed'));
+                const yMove = -scrollY * speed * 0.7;
+                card.style.transform = `translate3d(0, ${yMove}px, 0)`;
+            });
+        });
+
+
+        // --- CLICK TRANSITION LOGIC ---
+        // --- UPDATED CLICK TRANSITION LOGIC ---
+        projects.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                isTransitioning = true;
+
+                const href = card.getAttribute('data-href');
+
+                // 1. Detect if it's an Image or Video
+                let media = card.querySelector('img');
+                let isVideo = false;
+
+                // If no image found, look for video
+                if (!media) {
+                    media = card.querySelector('video');
+                    isVideo = true;
+                }
+
+                const rect = card.getBoundingClientRect();
+
+                // 2. Create the appropriate Clone (Image or Video)
+                let clone;
+                if (isVideo) {
+                    clone = document.createElement('video');
+                    // Get the source URL from the <source> tag or the src attribute
+                    const source = media.querySelector('source');
+                    clone.src = source ? source.src : media.src;
+                    clone.muted = true;
+                    clone.loop = true;
+                    clone.autoplay = true;
+                    clone.playsInline = true;
+                } else {
+                    clone = document.createElement('img');
+                    clone.src = media.src;
+                }
+
+                clone.classList.add('transition-clone');
+
+                // Set initial position
+                clone.style.top = rect.top + 'px';
+                clone.style.left = rect.left + 'px';
+                clone.style.width = rect.width + 'px';
+                clone.style.height = rect.height + 'px';
+
+                document.body.appendChild(clone);
+                document.body.classList.add('is-transitioning');
+
+                // Force Reflow
+                void clone.offsetWidth;
+
+                // Animate
+                clone.style.top = '0';
+                clone.style.left = '0';
+                clone.style.width = '100vw';
+                clone.style.height = '100vh';
+
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 800);
+            });
+        });
+
+        window.addEventListener('pageshow', (event) => {
+            // Check if we have any left-over transition clones
+            const existingClones = document.querySelectorAll('.transition-clone');
+
+            if (existingClones.length > 0) {
+                // Remove the clone image
+                existingClones.forEach(clone => clone.remove());
+
+                // Remove the class that hides the content
+                document.body.classList.remove('is-transitioning');
+
+                // Re-enable scroll math
+                isTransitioning = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
