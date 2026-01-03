@@ -279,20 +279,19 @@
     {
         "id": "oxygendepth",
         "title": "Oxygen Depth",
-        "heroImage": "assets/dreaming-computer/dream05.webm",
+        "heroImage": "assets/zuurstof/zuurstof.avif",
         "meta": {
             "what": "Tech Design",
             "year": "2021",
             "by": "Performance Technology Lab",
             "more info": "<a href='url>here</a>"
         },
-        "introText": "Technical design to automatically create a soundscape based on the heartbeat of 40 spectators.",
-        "detailText": "Oxygen Debt is a philosophical spinning class where you cycle to the limits of your body together with 25 other spectators. While you move and your oxygen debt in your muscles increases, you contemplate what is happening in your body at that moment. How does your heart beat, where does the blood flow, how do your muscles contract?<br><br>Each participant receives a heart-rate monitor that is connected to a speaker, so everyone’s heartbeat can be heard loud and clear. And then you start pedaling. As the heartbeats predictably accelerate, and everyone approaches their physical limits, you inevitably find yourself contemplating deeper matters: movement and stillness, strength and vulnerability, the finite and the infinite. Can you accept that your body is uncontrollable? That it might not even be yours at all? <br><br>To enable unrestricted movement for all spectators during the spinning class, a wireless setup is implemented. Each participant is equipped with a heart rate wristband and a speaker. A central computer gathers all the data and facilitates the entire experience by ensuring that the collective heartbeats of the spectators create a harmonious soundscape.",
+        "introText": "Technical design to automatically create a soundscape based on the individual heartbeats of each spectator.",
+        "detailText": "Oxygen Debt is a philosophical spinning class where you cycle to the limits of your body. While you move and your oxygen debt in your muscles increases, you contemplate what is happening in your body at that moment. How does your heart beat, where does the blood flow, how do your muscles contract?<br><br>Each participant receives a heart-rate monitor that is connected to a speaker, so everyone’s heartbeat can be heard loud and clear. And then you start pedaling. As the heartbeats predictably accelerate, and everyone approaches their physical limits, you inevitably find yourself contemplating deeper matters: movement and stillness, strength and vulnerability, the finite and the infinite. Can you accept that your body is uncontrollable? That it might not even be yours at all? <br><br>To enable unrestricted movement for all spectators during the spinning class, a wireless setup is implemented. Each participant is equipped with a heart rate wristband and a speaker. A central computer gathers all the data and facilitates the entire experience by ensuring that the collective heartbeats of the spectators create a harmonious soundscape.",
         "carousel1": [
-            "assets/dreaming-computer/dream01.mp4",
-            "assets/dreaming-computer/dream02.webm",
-            "assets/dreaming-computer/dream03.webm",
-            "assets/dreaming-computer/dream05.webm"
+            "assets/zuurstof/zuurstof.avif",
+            "assets/zuurstof/zuurstof2.avif",
+            "assets/zuurstof/zuurstof3.avif"
         ],
         "carousel2": []
     },
