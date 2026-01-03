@@ -12,7 +12,6 @@
         "introText": "<i>Casper Wortmann</i> works with computation, systems, and human interaction. With a background in artificial intelligence and performance-based practices, his work explores how algorithms shape experience, behaviour, and form. He develops interactive and real-time environments that combine machine learning, perception, and physical presence, often in collaboration with designers, performers, and institutions.",
         "detailText": "Looking for me? Find me on linkedin or give me a call.",
         "carousel1": [
-            "assets/about/solo-min.avif",
             "assets/about/imtheartist2.avif",
             "assets/about/dbf.avif",
             "assets/about/oerol-min.avif",
@@ -20,7 +19,8 @@
             "assets/about/isla.avif",
             "assets/about/dbf_006.avif",
             "assets/about/cts.avif",
-            "assets/about/apollo.gif"
+            "assets/about/apollo.gif",
+            "assets/about/solo-min.avif"
         ],
         "carousel2": [
             "assets/about/mayaonsong_1b.avif",
@@ -123,7 +123,7 @@
             "assets/brothers/broedersim03.avif"
         ],
         "carousel2": [
-            "assets/brothers/broedersgifkort.gif",
+            "assets/brothers/broedersgifkort.mp4",
             "assets/brothers/broedersim04.avif",
             "assets/brothers/broedersim05.avif",
             "assets/brothers/broedersim06.avif"
@@ -283,8 +283,7 @@
         "meta": {
             "what": "Tech Design",
             "year": "2021",
-            "by": "Performance Technology Lab",
-            "more info": "<a href='url>here</a>"
+            "more info": "- https://werkplaatsvandewoestijne.nl/ Here"
         },
         "introText": "Technical design to automatically create a soundscape based on the individual heartbeats of each spectator.",
         "detailText": "Oxygen Debt is a philosophical spinning class where you cycle to the limits of your body. While you move and your oxygen debt in your muscles increases, you contemplate what is happening in your body at that moment. How does your heart beat, where does the blood flow, how do your muscles contract?<br><br>Each participant receives a heart-rate monitor that is connected to a speaker, so everyone’s heartbeat can be heard loud and clear. And then you start pedaling. As the heartbeats predictably accelerate, and everyone approaches their physical limits, you inevitably find yourself contemplating deeper matters: movement and stillness, strength and vulnerability, the finite and the infinite. Can you accept that your body is uncontrollable? That it might not even be yours at all? <br><br>To enable unrestricted movement for all spectators during the spinning class, a wireless setup is implemented. Each participant is equipped with a heart rate wristband and a speaker. A central computer gathers all the data and facilitates the entire experience by ensuring that the collective heartbeats of the spectators create a harmonious soundscape.",

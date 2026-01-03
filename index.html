@@ -351,8 +351,7 @@
 
             <div class="project-card" data-href="project.html?id=grond" data-speed="1.2"
                 style="top: 295vh; left: 20%; width: 450px; height: 300px;">
-                <!-- <img src="assets/grond/grond03.gif"> -->
-                <video autoplay loop muted playsinline>
+                <video class="lazy-video" loop muted playsinline poster="assets/grond/grond02.avif">
                     <source src="assets/grond/grondje.webm" type="video/webm">
                     <source src="assets/grond/grondje.mp4" type="video/mp4">
                 </video>
@@ -384,7 +383,7 @@
             <div class="project-card" data-href="project.html?id=dreaming-computer" data-speed="1.11"
                 style="top: 570vh; right: 5%; width: 500px; height: 300px; z-index: -2;">
                 <video autoplay loop muted playsinline>
-                    <source src="assets/dreaming-computer/dream01.webmp" type="video/webm">
+                    <source src="assets/dreaming-computer/dream01.webm" type="video/webm">
                     <source src="assets/dreaming-computer/dream01.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Dreaming<br>Computer</div>
@@ -414,6 +413,39 @@
 
     <script>
         // --- PRELOADER LOGIC ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const lazyVideos = document.querySelectorAll("video");
+
+            if ("IntersectionObserver" in window) {
+                const videoObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach((entry) => {
+                        // If video is in view
+                        if (entry.isIntersecting) {
+                            const video = entry.target;
+                            // Try to play. If low power mode blocks it, the poster remains.
+                            const playPromise = video.play();
+                            if (playPromise !== undefined) {
+                                playPromise.catch(error => {
+                                    console.log("Autoplay prevented (Low Power Mode?):", error);
+                                });
+                            }
+                        }
+                        // If video leaves view (pause it to save iPhone memory)
+                        else {
+                            entry.target.pause();
+                        }
+                    });
+                }, {
+                    rootMargin: "0px 0px 200px 0px", // Start loading 200px before it hits the screen
+                    threshold: 0.1
+                });
+
+                lazyVideos.forEach((video) => {
+                    videoObserver.observe(video);
+                });
+            }
+        });
+
         document.addEventListener("DOMContentLoaded", () => {
             const loader = document.getElementById('loader');
             // Select all media inside project cards

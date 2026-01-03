@@ -66,6 +66,7 @@
             gap: 2rem;
             padding: 4rem 5%;
             border-bottom: 1px solid var(--accent);
+            /* min-height: 150px; */
         }
 
         .meta-item h3 {
@@ -80,6 +81,25 @@
             font-weight: 500;
             opacity: 0;
         }
+
+        /* Update .meta-item p to allow links */
+        .meta-item p a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 1px solid #666;
+            transition: all 0.3s ease;
+        }
+
+        .meta-item p a:hover {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        /* Ensure the container clears previous content cleanly */
+        /* .meta-grid {
+            min-height: 150px;
+            /* Prevent layout jump while loading */
+        /* } */
 
         .description-section {
             padding: 4rem 5%;
@@ -250,7 +270,9 @@
         <h1 class="hero-title" id="main-title"></h1>
     </header>
 
-    <section class="meta-grid">
+    <section class="meta-grid" id="meta-container"></section>
+
+    <!-- <section class="meta-grid">
         <div class="meta-item">
             <h3>About</h3>
             <p class="scramble-target" id="meta-about"></p>
@@ -267,7 +289,7 @@
             <h3>Location</h3>
             <p class="scramble-target" id="meta-location"></p>
         </div>
-    </section>
+    </section> -->
 
     <section class="description-section">
         <div class="ai-text" id="typewriter-intro"></div>
@@ -396,41 +418,164 @@
             });
         }, { threshold: 0.1 });
         // --- NEW: FETCH AND POPULATE LOGIC ---
+        // async function loadProject() {
+        //     // 1. Get Project ID
+        //     const params = new URLSearchParams(window.location.search);
+        //     const projectId = params.get('id');
+
+        //     if (!projectId) {
+        //         console.error("No project ID found in URL");
+        //         return;
+        //     }
+
+        //     // --- HELPER: Handles the Image vs Video logic + Cross-Browser Support ---
+        //     const createMediaElement = (src, className, isHero = false) => {
+        //         const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
+
+        //         if (isVideo) {
+        //             const vid = document.createElement('video');
+        //             vid.className = className;
+        //             if (isHero) vid.id = 'hero-img'; // Keep ID for hero
+
+        //             vid.autoplay = true;
+        //             vid.loop = true;
+        //             vid.muted = true;
+        //             vid.playsInline = true; // Crucial for Safari/iOS
+
+        //             // SMART SOURCE LOADING
+        //             // 1. Remove the extension (.mp4 or .webm)
+        //             const basePath = src.substring(0, src.lastIndexOf('.'));
+
+        //             // 2. Add MP4 Source (Safari prefers this usually)
+        //             const sourceMp4 = document.createElement('source');
+        //             sourceMp4.src = basePath + ".mp4";
+        //             sourceMp4.type = "video/mp4";
+        //             vid.appendChild(sourceMp4);
+
+        //             // 3. Add WebM Source (Chrome prefers this usually)
+        //             const sourceWebm = document.createElement('source');
+        //             sourceWebm.src = basePath + ".webm";
+        //             sourceWebm.type = "video/webm";
+        //             vid.appendChild(sourceWebm);
+
+        //             return vid;
+        //         } else {
+        //             // It's just an image
+        //             const img = document.createElement('img');
+        //             img.src = src;
+        //             img.className = className;
+        //             if (isHero) img.id = 'hero-img';
+        //             return img;
+        //         }
+        //     };
+
+        //     // 2. Fetch the JSON Database
+        //     try {
+        //         const response = await fetch('data.json');
+        //         const projects = await response.json();
+
+        //         // 3. Find current project
+        //         const projectIndex = projects.findIndex(p => p.id === projectId);
+        //         const project = projects[projectIndex];
+
+        //         if (!project) {
+        //             document.body.innerHTML = "<h1>Project Not Found</h1>";
+        //             return;
+        //         }
+
+        //         // 4. Determine Next Project
+        //         const nextIndex = (projectIndex + 1) % projects.length;
+        //         const nextProject = projects[nextIndex];
+
+        //         // 5. Populate HTML Elements
+        //         document.title = project.title + " - Portfolio";
+        //         document.getElementById('main-title').innerText = project.title;
+
+        //         // --- HERO MEDIA LOGIC ---
+        //         const existingHero = document.getElementById('hero-img');
+        //         const newHero = createMediaElement(project.heroImage, 'hero-img', true);
+
+        //         // Replace the placeholder image with our new smart element
+        //         existingHero.parentNode.replaceChild(newHero, existingHero);
+
+        //         document.getElementById('meta-about').innerText = project.meta.about;
+        //         document.getElementById('meta-year').innerText = project.meta.year;
+        //         document.getElementById('meta-type').innerText = project.meta.type;
+        //         document.getElementById('meta-location').innerText = project.meta.location;
+
+        //         document.getElementById('raw-intro').innerHTML = project.introText;
+        //         document.getElementById('raw-detail').innerHTML = project.detailText;
+
+        //         // 6. Build Carousels (Updated for Mixed Media)
+        //         const buildCarousel = (trackId, mediaItems) => {
+        //             const track = document.getElementById(trackId);
+
+        //             mediaItems.forEach(src => {
+        //                 // Use our helper to create the element
+        //                 const mediaElement = createMediaElement(src, 'carousel-img fly-in');
+
+        //                 // Add random initial transform for the fly-in effect
+        //                 const randomX = (Math.random() - 0.5) * 200;
+        //                 const randomY = 100 + Math.random() * 100;
+        //                 mediaElement.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
+
+        //                 track.appendChild(mediaElement);
+        //                 flyInObserver.observe(mediaElement);
+        //             });
+        //         };
+
+        //         if (project.carousel1) buildCarousel('track-1', project.carousel1);
+        //         if (project.carousel2) buildCarousel('track-2', project.carousel2);
+
+        //         // 7. Set Next Project Link
+        //         const link = document.getElementById('next-project-link');
+        //         link.innerText = "Next: " + nextProject.title + " ->";
+        //         link.href = `project.html?id=${nextProject.id}`;
+
+        //         // 8. TRIGGER ANIMATIONS
+        //         setTimeout(() => {
+        //             scrambleReveal(document.getElementById('main-title'), project.title, 2000);
+        //         }, 500);
+
+        //         const metas = document.querySelectorAll('.scramble-target');
+        //         metas.forEach((meta, index) => {
+        //             setTimeout(() => {
+        //                 scrambleReveal(meta, meta.innerText, 800);
+        //             }, 800 + (index * 200));
+        //         });
+
+        //         typeWriterIntro('typewriter-intro', 'raw-intro', 10);
+        //         revealTextBlocks('typewriter-detail', 'raw-detail');
+
+        //     } catch (error) {
+        //         console.error("Error loading project data:", error);
+        //     }
+        // }
+        // --- UPDATED LOAD PROJECT FUNCTION ---
         async function loadProject() {
-            // 1. Get Project ID
             const params = new URLSearchParams(window.location.search);
             const projectId = params.get('id');
 
-            if (!projectId) {
-                console.error("No project ID found in URL");
-                return;
-            }
+            if (!projectId) return;
 
-            // --- HELPER: Handles the Image vs Video logic + Cross-Browser Support ---
+            // --- HELPER: Create Media (Video/Image) ---
             const createMediaElement = (src, className, isHero = false) => {
                 const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
-
                 if (isVideo) {
                     const vid = document.createElement('video');
                     vid.className = className;
-                    if (isHero) vid.id = 'hero-img'; // Keep ID for hero
-
+                    if (isHero) vid.id = 'hero-img';
                     vid.autoplay = true;
                     vid.loop = true;
                     vid.muted = true;
-                    vid.playsInline = true; // Crucial for Safari/iOS
+                    vid.playsInline = true;
 
-                    // SMART SOURCE LOADING
-                    // 1. Remove the extension (.mp4 or .webm)
                     const basePath = src.substring(0, src.lastIndexOf('.'));
-
-                    // 2. Add MP4 Source (Safari prefers this usually)
                     const sourceMp4 = document.createElement('source');
                     sourceMp4.src = basePath + ".mp4";
                     sourceMp4.type = "video/mp4";
                     vid.appendChild(sourceMp4);
 
-                    // 3. Add WebM Source (Chrome prefers this usually)
                     const sourceWebm = document.createElement('source');
                     sourceWebm.src = basePath + ".webm";
                     sourceWebm.type = "video/webm";
@@ -438,7 +583,6 @@
 
                     return vid;
                 } else {
-                    // It's just an image
                     const img = document.createElement('img');
                     img.src = src;
                     img.className = className;
@@ -447,56 +591,93 @@
                 }
             };
 
-            // 2. Fetch the JSON Database
+            // --- HELPER: Parse Meta Content (Handles Links) ---
+            const parseMetaContent = (content) => {
+                // Check if content is a list of links (starts with "- ")
+                if (typeof content === 'string' && content.trim().startsWith('-')) {
+                    const items = content.split('-').filter(item => item.trim() !== '');
+
+                    return items.map(item => {
+                        // Extract URL and Text: "- https://google.com Google" or just "- https://google.com"
+                        // Simple regex to find URLs
+                        const urlRegex = /(https?:\/\/[^\s]+)/g;
+                        const match = item.match(urlRegex);
+
+                        if (match) {
+                            const url = match[0];
+                            // If there is text after the URL, use it. Otherwise use "Link" or the Domain.
+                            let text = item.replace(url, '').trim();
+                            if (!text) text = "View Link";
+                            return `<a href="${url}" target="_blank">${text}</a><br>`;
+                        }
+                        return item + "<br>";
+                    }).join('');
+                }
+
+                // Check for explicit HTML anchor tags
+                if (typeof content === 'string' && content.includes('<a href')) {
+                    return content;
+                }
+
+                return content;
+            };
+
             try {
                 const response = await fetch('data.json');
                 const projects = await response.json();
-
-                // 3. Find current project
                 const projectIndex = projects.findIndex(p => p.id === projectId);
                 const project = projects[projectIndex];
 
-                if (!project) {
-                    document.body.innerHTML = "<h1>Project Not Found</h1>";
-                    return;
-                }
+                if (!project) return;
 
-                // 4. Determine Next Project
                 const nextIndex = (projectIndex + 1) % projects.length;
                 const nextProject = projects[nextIndex];
 
-                // 5. Populate HTML Elements
+                // 1. Text & Titles
                 document.title = project.title + " - Portfolio";
                 document.getElementById('main-title').innerText = project.title;
 
-                // --- HERO MEDIA LOGIC ---
+                // 2. Hero Media
                 const existingHero = document.getElementById('hero-img');
                 const newHero = createMediaElement(project.heroImage, 'hero-img', true);
-
-                // Replace the placeholder image with our new smart element
                 existingHero.parentNode.replaceChild(newHero, existingHero);
 
-                document.getElementById('meta-about').innerText = project.meta.about;
-                document.getElementById('meta-year').innerText = project.meta.year;
-                document.getElementById('meta-type').innerText = project.meta.type;
-                document.getElementById('meta-location').innerText = project.meta.location;
+                // 3. DYNAMIC META TAGS GENERATION
+                const metaContainer = document.getElementById('meta-container');
+                metaContainer.innerHTML = ''; // Clear existing
 
+                // Loop through every key in the "meta" object
+                Object.entries(project.meta).forEach(([key, value]) => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'meta-item';
+
+                    const label = document.createElement('h3');
+                    label.innerText = key; // "Year", "By", "Location"
+
+                    const content = document.createElement('p');
+                    content.className = 'scramble-target';
+
+                    // Parse the content (check for links)
+                    content.innerHTML = parseMetaContent(value);
+
+                    itemDiv.appendChild(label);
+                    itemDiv.appendChild(content);
+                    metaContainer.appendChild(itemDiv);
+                });
+
+                // 4. Content Text
                 document.getElementById('raw-intro').innerHTML = project.introText;
                 document.getElementById('raw-detail').innerHTML = project.detailText;
 
-                // 6. Build Carousels (Updated for Mixed Media)
+                // 5. Carousels
                 const buildCarousel = (trackId, mediaItems) => {
                     const track = document.getElementById(trackId);
-
+                    if (!track) return;
                     mediaItems.forEach(src => {
-                        // Use our helper to create the element
                         const mediaElement = createMediaElement(src, 'carousel-img fly-in');
-
-                        // Add random initial transform for the fly-in effect
                         const randomX = (Math.random() - 0.5) * 200;
                         const randomY = 100 + Math.random() * 100;
                         mediaElement.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
-
                         track.appendChild(mediaElement);
                         flyInObserver.observe(mediaElement);
                     });
@@ -505,21 +686,31 @@
                 if (project.carousel1) buildCarousel('track-1', project.carousel1);
                 if (project.carousel2) buildCarousel('track-2', project.carousel2);
 
-                // 7. Set Next Project Link
+                // 6. Next Link
                 const link = document.getElementById('next-project-link');
                 link.innerText = "Next: " + nextProject.title + " ->";
                 link.href = `project.html?id=${nextProject.id}`;
 
-                // 8. TRIGGER ANIMATIONS
+                // 7. Animations
                 setTimeout(() => {
                     scrambleReveal(document.getElementById('main-title'), project.title, 2000);
                 }, 500);
 
+                // Animate the new dynamic meta tags
                 const metas = document.querySelectorAll('.scramble-target');
                 metas.forEach((meta, index) => {
-                    setTimeout(() => {
-                        scrambleReveal(meta, meta.innerText, 800);
-                    }, 800 + (index * 200));
+                    // Only scramble if it's plain text. If it contains HTML (links), just fade in
+                    if (meta.innerHTML.includes('<a') || meta.innerHTML.includes('<br>')) {
+                        meta.style.opacity = 0;
+                        setTimeout(() => {
+                            meta.style.transition = "opacity 1s";
+                            meta.style.opacity = 1;
+                        }, 800 + (index * 200));
+                    } else {
+                        setTimeout(() => {
+                            scrambleReveal(meta, meta.innerText, 800);
+                        }, 800 + (index * 200));
+                    }
                 });
 
                 typeWriterIntro('typewriter-intro', 'raw-intro', 10);
@@ -529,7 +720,6 @@
                 console.error("Error loading project data:", error);
             }
         }
-
         // Initialize
         loadProject();
     </script>
