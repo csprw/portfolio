@@ -128,15 +128,43 @@
             /* Change cursor to indicate clickable */
         }
 
-        .project-card img,
-        .project-card video {
+        .project-card .media {
+            position: relative;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+        }
+
+        .project-card img,
+        .project-card video {
             opacity: 0.9;
             transition: transform 0.6s ease, opacity 0.6s ease;
             pointer-events: none;
             /* Let clicks pass to the card div */
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        /* image is the guaranteed fallback */
+        .project-card .media img {
+            opacity: 0.95;
+            transform: translateZ(0);
+            /* helps iOS */
+        }
+
+        /* video starts hidden until it has a frame */
+        .project-card .media video {
+            opacity: 0;
+            transition: opacity 250ms ease;
+            transform: translateZ(0);
+            /* helps iOS */
+        }
+
+        .project-card .media video.is-ready {
+            opacity: 0.9;
         }
 
         .project-card:hover img,
@@ -339,8 +367,8 @@
                 style="top: 270vh; left: 10%; width: 380px; height: 500px;">
                 <!-- <img src="assets/brothers/broedersgifkort.gif"> -->
                 <video autoplay loop muted playsinline>
-                    <source data-src="assets/brothers/broedersgifkort.webm" type="video/webm">
                     <source data-src="assets/brothers/broedersgifkort.mp4" type="video/mp4">
+                    <source data-src="assets/brothers/broedersgifkort.webm" type="video/webm">
                 </video>
                 <div class="card-text">Brothers</div>
             </div>
@@ -376,14 +404,27 @@
             </div>
 
 
-            <div class="project-card" data-href="project.html?id=sevilla" data-speed="0.7"
+            <!-- <div class="project-card" data-href="project.html?id=sevilla" data-speed="0.7"
                 style="top: 350vh; left: 40%; width: 300px; height: 200px; z-index: -2;">
                 <video autoplay muted playsinline poster="assets/sevilla/sevilla.jpg">
                     <source data-src="assets/sevilla/sevilla.webm" type="video/webm">
                     <source data-src="assets/sevilla/sevilla.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Sevilla</div>
+            </div> -->
+
+            <div class="project-card" data-href="project.html?id=sevilla" data-speed="0.7"
+                style="top: 350vh; left: 40%; width: 300px; height: 200px; z-index: -2;">
+                <div class="media">
+                    <img src="assets/sevilla/sevilla.jpg" alt="">
+                    <video class="lazy-video" autoplay muted playsinline loop preload="none">
+                        <source data-src="assets/sevilla/sevilla.mp4" type="video/mp4">
+                        <source data-src="assets/sevilla/sevilla.webm" type="video/webm">
+                    </video>
+                </div>
+                <div class="card-text">Sevilla</div>
             </div>
+
 
             <div class="project-card" data-href="project.html?id=dreaming-computer" data-speed="1.11"
                 style="top: 570vh; right: 5%; width: 500px; height: 300px; z-index: -2;">
@@ -407,8 +448,8 @@
             <div class="project-card" data-href="project.html?id=other" data-speed="0.9"
                 style="top: 540vh; left: 15%; width: 300px; height: 400px; z-index: -3;">
                 <video autoplay muted playsinline>
-                    <source data-src="assets/other/other02.webm" type="video/webm">
                     <source data-src="assets/other/other02.mp4" type="video/mp4">
+                    <source data-src="assets/other/other02.webm" type="video/webm">
                 </video>
                 <div class="card-text">Other<br>Projects</div>
             </div>
@@ -431,91 +472,98 @@
         // VIDEO LAZY-LOAD + VISIBILITY PLAY
         // -----------------------------
         function setupLazyVideos() {
-            const videos = Array.from(document.querySelectorAll("video"));
+            const videos = Array.from(document.querySelectorAll("video.lazy-video, .project-card video"));
 
-            function primeVideoForIOS(video) {
-                // Make sure these are set as attributes (iOS is picky)
+            function prime(video) {
                 video.muted = true;
                 video.setAttribute("muted", "");
                 video.playsInline = true;
                 video.setAttribute("playsinline", "");
                 video.setAttribute("preload", "none");
+                // Don't show black if it fails: start hidden until ready
+                video.classList.remove("is-ready");
             }
 
-            function loadVideoSources(video) {
+            function loadSources(video) {
                 if (video.dataset.loaded === "1") return;
-
                 const sources = Array.from(video.querySelectorAll("source"));
-                sources.forEach((s) => {
-                    if (!s.src && s.dataset.src) {
-                        s.src = s.dataset.src;
-                    }
+
+                // Prefer mp4 on iOS by setting mp4 first in HTML.
+                sources.forEach(s => {
+                    if (!s.src && s.dataset.src) s.src = s.dataset.src;
                 });
 
-                // Trigger load
                 video.load();
                 video.dataset.loaded = "1";
             }
 
-            async function safePlay(video) {
+            function markReady(video) {
+                // First frame is available -> fade in over thumb
+                video.classList.add("is-ready");
+            }
+
+            async function tryPlay(video) {
                 try {
                     const p = video.play();
                     if (p && typeof p.then === "function") await p;
-                } catch (err) {
-                    // Autoplay may be blocked (Low Power Mode, etc.)
-                    // Poster stays visible, which is fine.
-                    // console.log("Video play blocked:", err);
+                } catch (e) {
+                    // Autoplay blocked -> keep thumb visible (video stays hidden)
                 }
             }
 
-            function pauseVideo(video) {
-                try {
-                    video.pause();
-                } catch (e) { }
+            function pause(video) {
+                try { video.pause(); } catch (e) { }
             }
 
-            // Prep all videos
-            videos.forEach((v) => primeVideoForIOS(v));
+            videos.forEach(v => {
+                prime(v);
 
-            // If no IntersectionObserver, just load + try play everything (fallback)
+                // When Safari has enough to show a frame
+                v.addEventListener("loadeddata", () => markReady(v), { once: true });
+                v.addEventListener("canplay", () => markReady(v), { once: true });
+
+                // If error, stay on image
+                v.addEventListener("error", () => {
+                    v.classList.remove("is-ready");
+                });
+            });
+
             if (!("IntersectionObserver" in window)) {
-                videos.forEach((v) => {
-                    loadVideoSources(v);
-                    safePlay(v);
+                videos.forEach(v => {
+                    loadSources(v);
+                    tryPlay(v);
                 });
                 return;
             }
 
-            const io = new IntersectionObserver(
-                (entries) => {
-                    for (const entry of entries) {
-                        const v = entry.target;
+            const io = new IntersectionObserver((entries) => {
+                for (const entry of entries) {
+                    const v = entry.target;
 
-                        if (entry.isIntersecting) {
-                            loadVideoSources(v);
-                            // Only play once loaded; if not loaded yet, play() will still be attempted
-                            safePlay(v);
-                        } else {
-                            pauseVideo(v);
-                        }
+                    if (entry.isIntersecting) {
+                        loadSources(v);
+                        tryPlay(v);
+                    } else {
+                        pause(v);
+                        // Optional: hide video again when offscreen to reduce random iOS black frames
+                        // v.classList.remove("is-ready");
                     }
-                },
-                {
-                    // Start loading slightly before it appears
-                    rootMargin: "300px 0px 300px 0px",
-                    threshold: 0.15,
                 }
-            );
+            }, {
+                rootMargin: "600px 0px 600px 0px",
+                threshold: 0.01,
+            });
 
-            videos.forEach((v) => io.observe(v));
+            videos.forEach(v => io.observe(v));
 
-            // When tab goes to background, pause everything (saves iPhone battery/memory)
             document.addEventListener("visibilitychange", () => {
-                if (document.hidden) {
-                    videos.forEach((v) => pauseVideo(v));
-                }
+                if (document.hidden) videos.forEach(pause);
             });
         }
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     setupLazyVideos();
+        // });
 
         // -----------------------------
         // LOADER LOGIC (yours, with one tweak: for lazy videos we also count "loadedmetadata")
