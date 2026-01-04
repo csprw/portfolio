@@ -560,48 +560,42 @@
 
             // --- HELPER: Create Media (Video/Image) ---
             // --- HELPER: Create Media (Video/Image) with GIF Fallback ---
+            // --- HELPER: Create Media (Video/Image) with GIF Fallback ---
             const createMediaElement = (src, className, isHero = false) => {
-                // Check if the source provided in JSON is a video
                 const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
 
                 if (isVideo) {
-                    // 1. Calculate names
                     const basePath = src.substring(0, src.lastIndexOf('.'));
                     // const gifSrc = basePath + ".gif";
                     const gifSrc = basePath + ".avif";
-                    console.log("Replacing mp4 file with: ")
-                    console.log(gifSrc)
-                    // const gifSrc = gifSrc
 
-                    // 2. Create the Video Element
                     const vid = document.createElement('video');
                     vid.className = className;
                     if (isHero) vid.id = 'hero-img';
 
-                    // Critical attributes for mobile autoplay
                     vid.autoplay = true;
                     vid.loop = true;
                     vid.muted = true;
                     vid.playsInline = true;
-                    vid.setAttribute('webkit-playsinline', 'webkit-playsinline'); // Old iOS support
+                    vid.setAttribute('webkit-playsinline', 'webkit-playsinline');
 
-                    // 3. Define the Fallback Function
+                    // -- FALLBACK LOGIC --
                     const triggerFallback = () => {
-                        console.log(`Video failed (${basePath}), falling back to GIF.`);
+                        // Prevent running this multiple times for the same video
+                        if (vid.dataset.fallbackTriggered) return;
+                        vid.dataset.fallbackTriggered = "true";
 
-                        // Create the replacement Image
+                        console.log(`Both video sources failed or autoplay denied for: ${basePath}. Swapping to GIF.`);
+
                         const img = document.createElement('img');
                         img.src = gifSrc;
                         img.className = className;
                         if (isHero) img.id = 'hero-img';
 
-                        // Swap them in the DOM
                         if (vid.parentNode) {
                             vid.parentNode.replaceChild(img, vid);
-
-                            // If this was a carousel item, make sure it fades in
+                            // Force fade-in for carousel items
                             if (className.includes('fly-in')) {
-                                // Slight delay to ensure DOM update, then force visible
                                 requestAnimationFrame(() => {
                                     img.style.opacity = 1;
                                     img.style.transform = 'translate(0,0) scale(1)';
@@ -610,27 +604,45 @@
                         }
                     };
 
-                    // 4. Create Sources with Error Handling
+                    // -- ERROR TRACKING --
+                    let sourceErrors = 0;
+                    const totalSources = 2; // We are adding 2 sources (mp4 + webm)
+
+                    const handleSourceError = () => {
+                        sourceErrors++;
+                        // Only fall back if ALL sources have failed
+                        if (sourceErrors >= totalSources) {
+                            triggerFallback();
+                        }
+                    };
+
+                    // Source 1: MP4
                     const sourceMp4 = document.createElement('source');
                     sourceMp4.src = basePath + ".mp4";
                     sourceMp4.type = "video/mp4";
-                    sourceMp4.onerror = triggerFallback; // If MP4 fails, try fallback
+                    sourceMp4.onerror = handleSourceError;
+                    vid.appendChild(sourceMp4);
 
+                    // Source 2: WebM
                     const sourceWebm = document.createElement('source');
                     sourceWebm.src = basePath + ".webm";
                     sourceWebm.type = "video/webm";
-                    sourceWebm.onerror = triggerFallback; // If WebM fails, try fallback
-
-                    // Append sources
-                    vid.appendChild(sourceMp4);
+                    sourceWebm.onerror = handleSourceError;
                     vid.appendChild(sourceWebm);
 
-                    // Final safety net: if the video tag itself errors
-                    vid.onerror = triggerFallback;
+                    // -- AUTOPLAY CHECK --
+                    // Even if files load, mobile might block autoplay (Low Power Mode).
+                    // If play() fails, we switch to GIF.
+                    vid.addEventListener('loadeddata', () => {
+                        vid.play().catch(e => {
+                            console.warn("Autoplay blocked by browser, switching to GIF:", e);
+                            triggerFallback();
+                        });
+                    });
 
                     return vid;
                 } else {
-                    // It's just a static image (jpg/png)
+                    // Standard Image
                     const img = document.createElement('img');
                     img.src = src;
                     img.className = className;
