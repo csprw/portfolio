@@ -259,7 +259,7 @@
     {
         "id": "dreaming-computer",
         "title": "Dreaming Computer",
-        "heroImage": "assets/dreaming-computer/dream05.webm",
+        "heroImage": "assets/dreaming-computer/dream01.gif",
         "meta": {
             "about": "Finetuned GAN",
             "year": "2021",
