@@ -123,7 +123,7 @@
             "assets/brothers/broedersim03.avif"
         ],
         "carousel2": [
-            "assets/brothers/broedersgifkort.mp4",
+            "assets/brothers/broeders.mp4",
             "assets/brothers/broedersim04.avif",
             "assets/brothers/broedersim05.avif",
             "assets/brothers/broedersim06.avif"
@@ -132,7 +132,7 @@
     {
         "id": "grond",
         "title": "Grond",
-        "heroImage": "assets/grond/grondje.mp4",
+        "heroImage": "assets/grond/grondje_fbgif.mp4",
         "meta": {
             "about": "Quick videoGen tests",
             "year": "2025",
@@ -143,14 +143,14 @@
         "detailText": "Made using Framepack-f1.",
         "carousel1": [
             "assets/grond/grond02.avif",
-            "assets/grond/grondje.mp4",
+            "assets/grond/grondje_fbgif.mp4",
             "assets/grond/grond04.avif"
         ],
         "carousel2": [
             "assets/grond/grond04.avif",
             "assets/grond/grond05.avif",
             "assets/grond/grond06b.avif",
-            "assets/grond/grondmachine.mp4"
+            "assets/grond/grondmachine_fbgif.mp4"
         ]
     },
     {
@@ -235,7 +235,7 @@
     {
         "id": "sevilla",
         "title": "Sevilla",
-        "heroImage": "assets/sevilla/shot_goal_stabilized.mp4",
+        "heroImage": "assets/sevilla/shot_goal_stabilized_fbgif.mp4",
         "meta": {
             "about": "AI Foosball system",
             "year": "2024",
@@ -253,13 +253,13 @@
         "carousel2": [
             "assets/sevilla/sevilla_fc_vis.avif",
             "assets/sevilla/field_IBM_sevilla_image_03.avif",
-            "assets/sevilla/sevilla.webm"
+            "assets/sevilla/sevilla_fbgif.webm"
         ]
     },
     {
         "id": "dreaming-computer",
         "title": "Dreaming Computer",
-        "heroImage": "assets/dreaming-computer/dream01.gif",
+        "heroImage": "assets/dreaming-computer/dream01_fbgif.mp4",
         "meta": {
             "about": "Finetuned GAN",
             "year": "2021",
@@ -269,10 +269,10 @@
         "introText": "Dreaming Computer explores the idea of imagination within artificial intelligence. Developed as a research project that went to Oerol and Over 't IJ, the project asks what it could mean for a computer to “dream”, and what such a dream reflects back to us as humans.",
         "detailText": "The work approaches AI not as an efficient tool, but as a speculative and symbolic medium. The system is encouraged to form associations rather than produce clear or functional outcomes. Instead of optimising for accuracy or coherence, the focus lies on ambiguity, intuition, and excess.<br><br>Rather than questioning how a computer dreams, the project examines why we project human qualities onto technological systems, and where those projections begin to fracture. The resulting images and forms exist between pattern and meaning, revealing the limits of both human interpretation and machine imagination.<br><br>In Dreaming Computer, technology functions as a mirror: not as a substitute for human consciousness, but as a surface onto which desire, belief, and uncertainty are briefly rendered.",
         "carousel1": [
-            "assets/dreaming-computer/dream01.mp4",
-            "assets/dreaming-computer/dream02.webm",
-            "assets/dreaming-computer/dream03.webm",
-            "assets/dreaming-computer/dream05.webm"
+            "assets/dreaming-computer/dream01_fbgif.mp4",
+            "assets/dreaming-computer/dream02_fbgif.webm",
+            "assets/dreaming-computer/dream03_fbgif.webm",
+            "assets/dreaming-computer/dream05_fbgif.webm"
         ],
         "carousel2": []
     },

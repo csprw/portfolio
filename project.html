@@ -561,13 +561,18 @@
             // --- HELPER: Create Media (Video/Image) ---
             // --- HELPER: Create Media (Video/Image) with GIF Fallback ---
             // --- HELPER: Create Media (Video/Image) with GIF Fallback ---
+            // --- HELPER: Create Media (Video/Image) with Smart Fallback ---
             const createMediaElement = (src, className, isHero = false) => {
                 const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
 
                 if (isVideo) {
                     const basePath = src.substring(0, src.lastIndexOf('.'));
-                    // const gifSrc = basePath + ".gif";
-                    const gifSrc = basePath + ".avif";
+
+                    // --- NEW LOGIC: Determine Fallback Extension ---
+                    // If "gif" is in the name, use .gif. Otherwise, use .avif
+                    const useGif = src.toLowerCase().includes('gif');
+                    const fallbackExtension = useGif ? '.gif' : '.avif';
+                    const fallbackSrc = basePath + fallbackExtension;
 
                     const vid = document.createElement('video');
                     vid.className = className;
@@ -581,20 +586,18 @@
 
                     // -- FALLBACK LOGIC --
                     const triggerFallback = () => {
-                        // Prevent running this multiple times for the same video
                         if (vid.dataset.fallbackTriggered) return;
                         vid.dataset.fallbackTriggered = "true";
 
-                        console.log(`Both video sources failed or autoplay denied for: ${basePath}. Swapping to GIF.`);
+                        console.log(`Video failed/blocked (${basePath}). Swapping to ${fallbackExtension}`);
 
                         const img = document.createElement('img');
-                        img.src = gifSrc;
+                        img.src = fallbackSrc;
                         img.className = className;
                         if (isHero) img.id = 'hero-img';
 
                         if (vid.parentNode) {
                             vid.parentNode.replaceChild(img, vid);
-                            // Force fade-in for carousel items
                             if (className.includes('fly-in')) {
                                 requestAnimationFrame(() => {
                                     img.style.opacity = 1;
@@ -606,24 +609,19 @@
 
                     // -- ERROR TRACKING --
                     let sourceErrors = 0;
-                    const totalSources = 2; // We are adding 2 sources (mp4 + webm)
+                    const totalSources = 2;
 
                     const handleSourceError = () => {
                         sourceErrors++;
-                        // Only fall back if ALL sources have failed
-                        if (sourceErrors >= totalSources) {
-                            triggerFallback();
-                        }
+                        if (sourceErrors >= totalSources) triggerFallback();
                     };
 
-                    // Source 1: MP4
                     const sourceMp4 = document.createElement('source');
                     sourceMp4.src = basePath + ".mp4";
                     sourceMp4.type = "video/mp4";
                     sourceMp4.onerror = handleSourceError;
                     vid.appendChild(sourceMp4);
 
-                    // Source 2: WebM
                     const sourceWebm = document.createElement('source');
                     sourceWebm.src = basePath + ".webm";
                     sourceWebm.type = "video/webm";
@@ -631,11 +629,9 @@
                     vid.appendChild(sourceWebm);
 
                     // -- AUTOPLAY CHECK --
-                    // Even if files load, mobile might block autoplay (Low Power Mode).
-                    // If play() fails, we switch to GIF.
                     vid.addEventListener('loadeddata', () => {
                         vid.play().catch(e => {
-                            console.warn("Autoplay blocked by browser, switching to GIF:", e);
+                            console.warn("Autoplay blocked, switching to fallback image.");
                             triggerFallback();
                         });
                     });
