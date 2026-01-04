@@ -316,8 +316,8 @@
             <div class="project-card" data-href="project.html?id=TESTabout" data-speed="0.9"
                 style="top: 140vh; right: 5%; width: 300px; height: 400px; z-index: -1;">
                 <video autoplay muted playsinline poster="assets/about/casperwortmann.avif">
-                    <source src="assets/about/face_mesh_output.webm" type="video/webm">
-                    <source src="assets/about/face_mesh_output.mp4" type="video/mp4">
+                    <source data-src="assets/about/face_mesh_output.webm" type="video/webm">
+                    <source data-src="assets/about/face_mesh_output.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">About</div>
             </div>
@@ -325,8 +325,8 @@
             <div class="project-card" data-href="project.html?id=TESTarchitecture" data-speed="1.2"
                 style="top: 120vh; left: 20%; width: 500px; height: 350px;">
                 <video autoplay muted loop playsinline poster="assets/architecture/architecture.avif">
-                    <source src="assets/architecture/mayansongzoom2.webm" type="video/webm">
-                    <source src="assets/architecture/mayansongzoom2.mp4" type="video/mp4">
+                    <source data-src="assets/architecture/mayansongzoom2.webm" type="video/webm">
+                    <source data-src="assets/architecture/mayansongzoom2.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Architecture<br>and<br>Emotion</div>
             </div>
@@ -347,8 +347,8 @@
                 style="top: 270vh; left: 10%; width: 380px; height: 500px;">
                 <!-- <img src="assets/brothers/broedersgifkort.gif"> -->
                 <video autoplay loop muted playsinline>
-                    <source src="assets/brothers/broedersgifkort.webm" type="video/webm">
-                    <source src="assets/brothers/broedersgifkort.mp4" type="video/mp4">
+                    <source data-src="assets/brothers/broedersgifkort.webm" type="video/webm">
+                    <source data-src="assets/brothers/broedersgifkort.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Brothers</div>
             </div>
@@ -379,8 +379,8 @@
             <div class="project-card" data-href="project.html?id=TESTsevilla" data-speed="0.7"
                 style="top: 350vh; left: 40%; width: 300px; height: 200px; z-index: -2;">
                 <video autoplay muted playsinline poster="assets/sevilla/sevilla.jpg">
-                    <source src="assets/sevilla/sevilla.webm" type="video/webm">
-                    <source src="assets/sevilla/sevilla.mp4" type="video/mp4">
+                    <source data-src="assets/sevilla/sevilla.webm" type="video/webm">
+                    <source data-src="assets/sevilla/sevilla.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Sevilla</div>
             </div>
@@ -388,8 +388,8 @@
             <div class="project-card" data-href="project.html?id=TESTdreaming-computer" data-speed="1.11"
                 style="top: 570vh; right: 5%; width: 500px; height: 300px; z-index: -2;">
                 <video autoplay muted playsinline>
-                    <source src="assets/dreaming-computer/dream01.webm" type="video/webm">
-                    <source src="assets/dreaming-computer/dream01.mp4" type="video/mp4">
+                    <source data-src="assets/dreaming-computer/dream01.webm" type="video/webm">
+                    <source data-src="assets/dreaming-computer/dream01.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Dreaming<br>Computer</div>
             </div>
@@ -406,8 +406,8 @@
             <div class="project-card" data-href="project.html?id=TESTother" data-speed="0.9"
                 style="top: 540vh; left: 15%; width: 300px; height: 400px; z-index: -3;">
                 <video autoplay muted playsinline>
-                    <source src="assets/other/other02.webm" type="video/webm">
-                    <source src="assets/other/other02.mp4" type="video/mp4">
+                    <source data-src="assets/other/other02.webm" type="video/webm">
+                    <source data-src="assets/other/other02.mp4" type="video/mp4">
                 </video>
                 <div class="card-text">Other<br>Projects</div>
             </div>
@@ -426,208 +426,279 @@
     </section>
 
     <script>
-        // --- PRELOADER LOGIC ---
-        document.addEventListener("DOMContentLoaded", () => {
-            const lazyVideos = document.querySelectorAll("video");
+        // -----------------------------
+        // VIDEO LAZY-LOAD + VISIBILITY PLAY
+        // -----------------------------
+        function setupLazyVideos() {
+            const videos = Array.from(document.querySelectorAll("video"));
 
-            if ("IntersectionObserver" in window) {
-                const videoObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach((entry) => {
-                        // If video is in view
-                        if (entry.isIntersecting) {
-                            const video = entry.target;
-                            // Try to play. If low power mode blocks it, the poster remains.
-                            const playPromise = video.play();
-                            if (playPromise !== undefined) {
-                                playPromise.catch(error => {
-                                    console.log("Autoplay prevented (Low Power Mode?):", error);
-                                });
-                            }
-                        }
-                        // If video leaves view (pause it to save iPhone memory)
-                        else {
-                            entry.target.pause();
-                        }
-                    });
-                }, {
-                    rootMargin: "0px 0px 200px 0px", // Start loading 200px before it hits the screen
-                    threshold: 0.1
-                });
-
-                lazyVideos.forEach((video) => {
-                    videoObserver.observe(video);
-                });
+            function primeVideoForIOS(video) {
+                // Make sure these are set as attributes (iOS is picky)
+                video.muted = true;
+                video.setAttribute("muted", "");
+                video.playsInline = true;
+                video.setAttribute("playsinline", "");
+                video.setAttribute("preload", "none");
             }
-        });
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const loader = document.getElementById('loader');
-            // Select all media inside project cards
-            const allMedia = document.querySelectorAll('.project-card img, .project-card video');
-            // Only take the first 5
+            function loadVideoSources(video) {
+                if (video.dataset.loaded === "1") return;
+
+                const sources = Array.from(video.querySelectorAll("source"));
+                sources.forEach((s) => {
+                    if (!s.src && s.dataset.src) {
+                        s.src = s.dataset.src;
+                    }
+                });
+
+                // Trigger load
+                video.load();
+                video.dataset.loaded = "1";
+            }
+
+            async function safePlay(video) {
+                try {
+                    const p = video.play();
+                    if (p && typeof p.then === "function") await p;
+                } catch (err) {
+                    // Autoplay may be blocked (Low Power Mode, etc.)
+                    // Poster stays visible, which is fine.
+                    // console.log("Video play blocked:", err);
+                }
+            }
+
+            function pauseVideo(video) {
+                try {
+                    video.pause();
+                } catch (e) { }
+            }
+
+            // Prep all videos
+            videos.forEach((v) => primeVideoForIOS(v));
+
+            // If no IntersectionObserver, just load + try play everything (fallback)
+            if (!("IntersectionObserver" in window)) {
+                videos.forEach((v) => {
+                    loadVideoSources(v);
+                    safePlay(v);
+                });
+                return;
+            }
+
+            const io = new IntersectionObserver(
+                (entries) => {
+                    for (const entry of entries) {
+                        const v = entry.target;
+
+                        if (entry.isIntersecting) {
+                            loadVideoSources(v);
+                            // Only play once loaded; if not loaded yet, play() will still be attempted
+                            safePlay(v);
+                        } else {
+                            pauseVideo(v);
+                        }
+                    }
+                },
+                {
+                    // Start loading slightly before it appears
+                    rootMargin: "300px 0px 300px 0px",
+                    threshold: 0.15,
+                }
+            );
+
+            videos.forEach((v) => io.observe(v));
+
+            // When tab goes to background, pause everything (saves iPhone battery/memory)
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) {
+                    videos.forEach((v) => pauseVideo(v));
+                }
+            });
+        }
+
+        // -----------------------------
+        // LOADER LOGIC (yours, with one tweak: for lazy videos we also count "loadedmetadata")
+        // -----------------------------
+        function setupLoader() {
+            const loader = document.getElementById("loader");
+            const allMedia = document.querySelectorAll(".project-card img, .project-card video");
             const mediaToLoad = Array.from(allMedia).slice(0, 3);
 
-            let promises = [];
-
-            mediaToLoad.forEach(media => {
-                promises.push(new Promise((resolve) => {
-                    // CASE 1: IMAGE
-                    if (media.tagName === 'IMG') {
-                        if (media.complete) {
-                            resolve(); // Already loaded (cache)
-                        } else {
+            const promises = mediaToLoad.map((media) => {
+                return new Promise((resolve) => {
+                    if (media.tagName === "IMG") {
+                        if (media.complete) resolve();
+                        else {
                             media.onload = resolve;
-                            media.onerror = resolve; // Resolve even on error so site doesn't hang
-                        }
-                    }
-                    // CASE 2: VIDEO
-                    else if (media.tagName === 'VIDEO') {
-                        // readyState 3 means we have enough data to play current and future frames
-                        if (media.readyState >= 3) {
-                            resolve();
-                        } else {
-                            media.oncanplay = resolve;
                             media.onerror = resolve;
                         }
+                    } else if (media.tagName === "VIDEO") {
+                        // With lazy-loading, a video might not have sources yet.
+                        // We'll resolve on metadata/first frame readiness if possible, otherwise don't block loader.
+                        const done = () => resolve();
+
+                        // If already has enough data
+                        if (media.readyState >= 2) {
+                            done();
+                        } else {
+                            media.onloadedmetadata = done;
+                            media.oncanplay = done;
+                            media.onerror = done;
+
+                            // Safety: don't block loader waiting for video
+                            setTimeout(done, 1200);
+                        }
+                    } else {
+                        resolve();
                     }
-                }));
+                });
             });
 
-            // Safety fallback: If loading takes longer than 4 seconds, force show the site.
-            const timeout = new Promise((resolve) => {
-                setTimeout(resolve, 4000);
-            });
+            const timeout = new Promise((resolve) => setTimeout(resolve, 4000));
 
-            // Wait for either all 5 images/videos OR the timeout
             Promise.race([Promise.all(promises), timeout]).then(() => {
-                document.body.classList.add('loaded');
+                document.body.classList.add("loaded");
             });
-        });
+        }
 
-        // Main
-        const chars = document.querySelectorAll('.char');
-        const projects = document.querySelectorAll('.project-card');
-        const body = document.body;
-        let isTransitioning = false; // Flag to stop scroll math when clicking
+        // -----------------------------
+        // MAIN SCROLL + CLICK LOGIC (yours)
+        // -----------------------------
+        function setupMainInteractions() {
+            const chars = document.querySelectorAll(".char");
+            const projects = document.querySelectorAll(".project-card");
+            const body = document.body;
+            let isTransitioning = false;
 
-        // --- SCROLL LOGIC ---
-        window.addEventListener('scroll', () => {
-            if (isTransitioning) return; // Stop updates if we are leaving
+            // --- SCROLL LOGIC ---
+            window.addEventListener("scroll", () => {
+                if (isTransitioning) return;
 
-            const scrollY = window.scrollY;
-            const screenH = window.innerHeight;
+                const scrollY = window.scrollY;
+                const screenH = window.innerHeight;
 
-            // 1. Color Flip
-            if (scrollY > screenH * 0.2) {
-                body.style.backgroundColor = '#000000';
-                body.style.color = '#ffffff';
-                chars.forEach(char => char.style.color = '#ffffff');
-            } else {
-                body.style.backgroundColor = '#ffffff';
-                body.style.color = '#000000';
-                chars.forEach(char => char.style.color = '#000000');
-            }
-
-            // 2. Name Explode
-            chars.forEach(char => {
-                const speed = parseFloat(char.getAttribute('data-speed'));
-                const yPos = scrollY * speed * 0.35;
-                const dist = Math.abs(yPos);
-                const opacity = 1 - Math.min(dist / 500, 1);
-                const blur = Math.min(dist / 50, 10);
-                char.style.transform = `translate3d(0, ${yPos}px, 0)`;
-                char.style.opacity = opacity;
-                char.style.filter = `blur(${blur}px)`;
-            });
-
-            // 3. Projects Fly
-            projects.forEach(card => {
-                const speed = parseFloat(card.getAttribute('data-speed'));
-                const yMove = -scrollY * speed * 0.7;
-                card.style.transform = `translate3d(0, ${yMove}px, 0)`;
-            });
-        });
-
-
-        // --- CLICK TRANSITION LOGIC ---
-        // --- UPDATED CLICK TRANSITION LOGIC ---
-        projects.forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                isTransitioning = true;
-
-                const href = card.getAttribute('data-href');
-
-                // 1. Detect if it's an Image or Video
-                let media = card.querySelector('img');
-                let isVideo = false;
-
-                // If no image found, look for video
-                if (!media) {
-                    media = card.querySelector('video');
-                    isVideo = true;
-                }
-
-                const rect = card.getBoundingClientRect();
-
-                // 2. Create the appropriate Clone (Image or Video)
-                let clone;
-                if (isVideo) {
-                    clone = document.createElement('video');
-                    // Get the source URL from the <source> tag or the src attribute
-                    const source = media.querySelector('source');
-                    clone.src = source ? source.src : media.src;
-                    clone.muted = true;
-                    clone.loop = true;
-                    clone.autoplay = true;
-                    clone.playsInline = true;
+                // 1. Color Flip
+                if (scrollY > screenH * 0.2) {
+                    body.style.backgroundColor = "#000000";
+                    body.style.color = "#ffffff";
+                    chars.forEach((char) => (char.style.color = "#ffffff"));
                 } else {
-                    clone = document.createElement('img');
-                    clone.src = media.src;
+                    body.style.backgroundColor = "#ffffff";
+                    body.style.color = "#000000";
+                    chars.forEach((char) => (char.style.color = "#000000"));
                 }
 
-                clone.classList.add('transition-clone');
+                // 2. Name Explode
+                chars.forEach((char) => {
+                    const speed = parseFloat(char.getAttribute("data-speed"));
+                    const yPos = scrollY * speed * 0.35;
+                    const dist = Math.abs(yPos);
+                    const opacity = 1 - Math.min(dist / 500, 1);
+                    const blur = Math.min(dist / 50, 10);
+                    char.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                    char.style.opacity = opacity;
+                    char.style.filter = `blur(${blur}px)`;
+                });
 
-                // Set initial position
-                clone.style.top = rect.top + 'px';
-                clone.style.left = rect.left + 'px';
-                clone.style.width = rect.width + 'px';
-                clone.style.height = rect.height + 'px';
-
-                document.body.appendChild(clone);
-                document.body.classList.add('is-transitioning');
-
-                // Force Reflow
-                void clone.offsetWidth;
-
-                // Animate
-                clone.style.top = '0';
-                clone.style.left = '0';
-                clone.style.width = '100vw';
-                clone.style.height = '100vh';
-
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 800);
+                // 3. Projects Fly
+                projects.forEach((card) => {
+                    const speed = parseFloat(card.getAttribute("data-speed"));
+                    const yMove = -scrollY * speed * 0.7;
+                    card.style.transform = `translate3d(0, ${yMove}px, 0)`;
+                });
             });
-        });
 
-        window.addEventListener('pageshow', (event) => {
-            // Check if we have any left-over transition clones
-            const existingClones = document.querySelectorAll('.transition-clone');
+            // --- CLICK TRANSITION LOGIC ---
+            projects.forEach((card) => {
+                card.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    isTransitioning = true;
 
-            if (existingClones.length > 0) {
-                // Remove the clone image
-                existingClones.forEach(clone => clone.remove());
+                    const href = card.getAttribute("data-href");
 
-                // Remove the class that hides the content
-                document.body.classList.remove('is-transitioning');
+                    // 1. Detect if it's an Image or Video
+                    let media = card.querySelector("img");
+                    let isVideo = false;
 
-                // Re-enable scroll math
-                isTransitioning = false;
-            }
+                    if (!media) {
+                        media = card.querySelector("video");
+                        isVideo = true;
+                    }
+
+                    const rect = card.getBoundingClientRect();
+
+                    // 2. Create the appropriate Clone (Image or Video)
+                    let clone;
+                    if (isVideo) {
+                        clone = document.createElement("video");
+
+                        // If your sources are lazy (data-src), try to pick the mp4 first
+                        const sources = Array.from(media.querySelectorAll("source"));
+                        const mp4 = sources.find((s) => (s.type || "").includes("mp4"));
+                        const any = sources[0];
+
+                        const chosen = mp4 || any;
+                        const src = (chosen && (chosen.src || chosen.dataset.src)) || media.src;
+
+                        clone.src = src;
+                        clone.muted = true;
+                        clone.setAttribute("muted", "");
+                        clone.loop = true;
+                        clone.autoplay = true;
+                        clone.playsInline = true;
+                        clone.setAttribute("playsinline", "");
+                    } else {
+                        clone = document.createElement("img");
+                        clone.src = media.src;
+                    }
+
+                    clone.classList.add("transition-clone");
+
+                    // Set initial position
+                    clone.style.top = rect.top + "px";
+                    clone.style.left = rect.left + "px";
+                    clone.style.width = rect.width + "px";
+                    clone.style.height = rect.height + "px";
+
+                    document.body.appendChild(clone);
+                    document.body.classList.add("is-transitioning");
+
+                    // Force Reflow
+                    void clone.offsetWidth;
+
+                    // Animate
+                    clone.style.top = "0";
+                    clone.style.left = "0";
+                    clone.style.width = "100vw";
+                    clone.style.height = "100vh";
+
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 800);
+                });
+            });
+
+            window.addEventListener("pageshow", () => {
+                const existingClones = document.querySelectorAll(".transition-clone");
+                if (existingClones.length > 0) {
+                    existingClones.forEach((clone) => clone.remove());
+                    document.body.classList.remove("is-transitioning");
+                    isTransitioning = false;
+                }
+            });
+        }
+
+        // -----------------------------
+        // INIT
+        // -----------------------------
+        document.addEventListener("DOMContentLoaded", () => {
+            setupLazyVideos();
+            setupLoader();
+            setupMainInteractions();
         });
     </script>
+
+
 
 </body>
 
