@@ -7,10 +7,10 @@
             "Name": "Casper Wortmann",
             "Likes": "Machine Learning, Art, anything in between",
             "Location": "Amsterdam, NL",
-            "Contact": "Linkedin"
+            "Contact": "- [LinkedIn](https://www.linkedin.com/in/casper-wortmann-69b744193/)"
         },
-        "introText": "<i>Casper Wortmann</i> works with computation, systems, and human interaction. With a background in artificial intelligence and performance-based practices, his work explores how algorithms shape experience, behaviour, and form. He develops interactive and real-time environments that combine machine learning, perception, and physical presence, often in collaboration with designers, performers, and institutions.",
-        "detailText": "Looking for me? Find me on linkedin or give me a call.",
+        "introText": "<i>Casper Wortmann</i> works with computation, systems, and human interaction. With a background in artificial intelligence and performance art, his work explores how algorithms shape experience, behaviour, and form. <br>He develops interactive and real-time environments that combine machine learning, perception, and physical presence, often in collaboration with designers, performers, and institutions.",
+        "detailText": "Looking for me? Find me on LinkedIn or give me a call.",
         "carousel1": [
             "assets/about/imtheartist2.avif",
             "assets/about/dbf.avif",
@@ -40,8 +40,8 @@
             "type": "Museum",
             "location": "Nieuwe Instituut, Rotterdam"
         },
-        "introText": "This interactive installation was developed for Ma Yansong: Architecture and Emotion at the Nieuwe Instituut in Rotterdam. The exhibition explored how architecture can move beyond function and efficiency to create emotional, sensory experiences, drawing on the work and philosophy of Ma Yansong and MAD Architects. <br><br>Central to the exhibition was the idea that architecture begins not with calculation, but with intuition, feeling, and an embodied relationship to nature and place.",
-        "detailText": "Within this context, the AI Interactive Table invited visitors to take part in that first, often private moment of architectural creation: the sketch. Using a simple gestural drawing, visitors were encouraged to draw instinctively, without instruction or expectation of outcome. Their strokes were deliberately raw, imprecise, and expressive—echoing the emotional sketches through which Ma Yansong often initiates his designs. <br>An AI system, developed by Casper Wortmann and Thomas Groenewegen, interpreted these drawings in real time. Trained on visual material from MAD Architects' projects, the system analyzed the gestures, rhythms, and spatial tendencies of each sketch and translated them into an architectural interpretation. Moments later, the drawing reappeared as a speculative form on screen and online, bridging the gap between intuition and computation.",
+        "introText": "This interactive installation was developed for Ma Yansong: Architecture and Emotion at the Nieuwe Instituut in Rotterdam. The exhibition explored how architecture can move beyond function and efficiency to create emotional, sensory experiences, drawing on the work and philosophy of Ma Yansong and MAD Architects. ",
+        "detailText": "For this exhibition, an Interactive Table was created that invites visitors to take part in the first, often private moment of architectural creation: the sketch. Using a simple gestural drawing, visitors are encouraged to draw instinctively, without instruction or expectation of outcome. <br>An AI system, developed by Casper Wortmann and Thomas Groenewegen, interpreted these drawings in real time. Trained on visual material from MAD Architects' projects, the system analyzed the gestures, rhythms, and spatial tendencies of each sketch and translated them into an architectural interpretation. <br>Moments later, the drawing reappeared as a speculative form on screen and online, bridging the gap between intuition and computation.",
         "carousel1": [
             "assets/architecture/img_3694-min.avif",
             "assets/architecture/img01-min.avif",
@@ -78,8 +78,8 @@
             "type": "Research",
             "method": "Flux"
         },
-        "introText": "Trash vs Maquette is a small research project developed alongside Architecture and Emotion. Instead of training a model on finished buildings, the system was fine-tuned on images of architectural process: workspaces, sketches, and provisional maquettes.",
-        "detailText": "These images often show architecture before it becomes architecture. Quick constructions made from toothpicks, tape, plastic bags, or improvised materials — objects that never appear in the final building, yet quietly shape its direction. By including these materials, the model learns not only form, but intention: hesitation, urgency, and experimentation.<br><br>The resulting outputs sit somewhere between trash and maquette, reflecting how architectural ideas first take shape — fragile, speculative, and unresolved.",
+        "introText": "<i>Trash vs Maquette</i> is a small research project developed alongside <i>Architecture and Emotion</i>. Instead of training a model on finished buildings, the system was fine-tuned on images of architectural process: workspaces, sketches, and provisional maquettes.",
+        "detailText": "These images often show architecture before it becomes architecture. Quick constructions made from toothpicks, tape, plastic bags, or improvised materials — objects that never appear in the final building, yet quietly shape its direction. By including these materials, the model learns not only form, but intention: hesitation, urgency, and experimentation.<br><br>The resulting outputs sit somewhere between trash and maquette, reflecting how architectural ideas first take shape: fragile, speculative, and unresolved.",
         "carousel1": [
             "assets/architecture-research/research_002.avif",
             "assets/architecture-research/research_003.avif",
@@ -261,10 +261,10 @@
         "title": "Dreaming Computer",
         "heroImage": "assets/dreaming-computer/dream01_fbgif.mp4",
         "meta": {
-            "about": "Finetuned GAN",
-            "year": "2021",
-            "by": "Performance Technology Lab",
-            "links": "- https://performancetechnologylab.nl/producties/dromende-computer/"
+            "About": "Finetuned GAN",
+            "Year": "2021",
+            "Where": "Performance Technology Lab",
+            "More info": "- [Here](https://performancetechnologylab.nl/producties/dromende-computer/)"
         },
         "introText": "Dreaming Computer explores the idea of imagination within artificial intelligence. Developed as a research project that went to Oerol and Over 't IJ, the project asks what it could mean for a computer to “dream”, and what such a dream reflects back to us as humans.",
         "detailText": "The work approaches AI not as an efficient tool, but as a speculative and symbolic medium. The system is encouraged to form associations rather than produce clear or functional outcomes. Instead of optimising for accuracy or coherence, the focus lies on ambiguity, intuition, and excess.<br><br>Rather than questioning how a computer dreams, the project examines why we project human qualities onto technological systems, and where those projections begin to fracture. The resulting images and forms exist between pattern and meaning, revealing the limits of both human interpretation and machine imagination.<br><br>In Dreaming Computer, technology functions as a mirror: not as a substitute for human consciousness, but as a surface onto which desire, belief, and uncertainty are briefly rendered.",
@@ -283,7 +283,7 @@
         "meta": {
             "what": "Tech Design",
             "year": "2021",
-            "more info": "- https://werkplaatsvandewoestijne.nl/ Here"
+            "More info": "- [Here](https://werkplaatsvandewoestijne.nl/)"
         },
         "introText": "Technical design to automatically create a soundscape based on the individual heartbeats of each spectator.",
         "detailText": "Oxygen Debt is a philosophical spinning class where you cycle to the limits of your body. While you move and your oxygen debt in your muscles increases, you contemplate what is happening in your body at that moment. How does your heart beat, where does the blood flow, how do your muscles contract?<br><br>Each participant receives a heart-rate monitor that is connected to a speaker, so everyone’s heartbeat can be heard loud and clear. And then you start pedaling. As the heartbeats predictably accelerate, and everyone approaches their physical limits, you inevitably find yourself contemplating deeper matters: movement and stillness, strength and vulnerability, the finite and the infinite. Can you accept that your body is uncontrollable? That it might not even be yours at all? <br><br>To enable unrestricted movement for all spectators during the spinning class, a wireless setup is implemented. Each participant is equipped with a heart rate wristband and a speaker. A central computer gathers all the data and facilitates the entire experience by ensuring that the collective heartbeats of the spectators create a harmonious soundscape.",
@@ -297,9 +297,9 @@
     {
         "id": "other",
         "title": "Other Projects",
-        "heroImage": "assets/other/other02.webm",
+        "heroImage": "assets/other/other02_fbgif.mp4",
         "meta": {
-            "about": "Experiments, collaborations, and complete works",
+            "about": "Experiments, collaborations, and other works",
             "note": "The rest of the iceberg"
         },
         "introText": "Not everything fits neatly into a single category. Alongside the projects shown here, I work across a wide range of formats and contexts. With a Master’s degree in Artificial Intelligence and an art degree, I move between hardcore machine learning, hands-on technical work, and collaborative artistic projects — often driven by curiosity rather than a fixed brief.",

@@ -107,14 +107,14 @@
         }
 
         .ai-text {
-            font-size: 2rem;
-            line-height: 1.4;
-            min-height: 20rem;
+            font-size: 1.5rem;
+            line-height: 1.0;
+            min-height: 25rem;
         }
 
         .ai-text-secondary {
-            font-size: 1.5rem;
-            line-height: 1.5;
+            font-size: 1.2rem;
+            line-height: 1.2;
             color: #ccc;
         }
 
@@ -417,140 +417,7 @@
                 }
             });
         }, { threshold: 0.1 });
-        // --- NEW: FETCH AND POPULATE LOGIC ---
-        // async function loadProject() {
-        //     // 1. Get Project ID
-        //     const params = new URLSearchParams(window.location.search);
-        //     const projectId = params.get('id');
 
-        //     if (!projectId) {
-        //         console.error("No project ID found in URL");
-        //         return;
-        //     }
-
-        //     // --- HELPER: Handles the Image vs Video logic + Cross-Browser Support ---
-        //     const createMediaElement = (src, className, isHero = false) => {
-        //         const isVideo = src.toLowerCase().endsWith('.mp4') || src.toLowerCase().endsWith('.webm');
-
-        //         if (isVideo) {
-        //             const vid = document.createElement('video');
-        //             vid.className = className;
-        //             if (isHero) vid.id = 'hero-img'; // Keep ID for hero
-
-        //             vid.autoplay = true;
-        //             vid.loop = true;
-        //             vid.muted = true;
-        //             vid.playsInline = true; // Crucial for Safari/iOS
-
-        //             // SMART SOURCE LOADING
-        //             // 1. Remove the extension (.mp4 or .webm)
-        //             const basePath = src.substring(0, src.lastIndexOf('.'));
-
-        //             // 2. Add MP4 Source (Safari prefers this usually)
-        //             const sourceMp4 = document.createElement('source');
-        //             sourceMp4.src = basePath + ".mp4";
-        //             sourceMp4.type = "video/mp4";
-        //             vid.appendChild(sourceMp4);
-
-        //             // 3. Add WebM Source (Chrome prefers this usually)
-        //             const sourceWebm = document.createElement('source');
-        //             sourceWebm.src = basePath + ".webm";
-        //             sourceWebm.type = "video/webm";
-        //             vid.appendChild(sourceWebm);
-
-        //             return vid;
-        //         } else {
-        //             // It's just an image
-        //             const img = document.createElement('img');
-        //             img.src = src;
-        //             img.className = className;
-        //             if (isHero) img.id = 'hero-img';
-        //             return img;
-        //         }
-        //     };
-
-        //     // 2. Fetch the JSON Database
-        //     try {
-        //         const response = await fetch('data.json');
-        //         const projects = await response.json();
-
-        //         // 3. Find current project
-        //         const projectIndex = projects.findIndex(p => p.id === projectId);
-        //         const project = projects[projectIndex];
-
-        //         if (!project) {
-        //             document.body.innerHTML = "<h1>Project Not Found</h1>";
-        //             return;
-        //         }
-
-        //         // 4. Determine Next Project
-        //         const nextIndex = (projectIndex + 1) % projects.length;
-        //         const nextProject = projects[nextIndex];
-
-        //         // 5. Populate HTML Elements
-        //         document.title = project.title + " - Portfolio";
-        //         document.getElementById('main-title').innerText = project.title;
-
-        //         // --- HERO MEDIA LOGIC ---
-        //         const existingHero = document.getElementById('hero-img');
-        //         const newHero = createMediaElement(project.heroImage, 'hero-img', true);
-
-        //         // Replace the placeholder image with our new smart element
-        //         existingHero.parentNode.replaceChild(newHero, existingHero);
-
-        //         document.getElementById('meta-about').innerText = project.meta.about;
-        //         document.getElementById('meta-year').innerText = project.meta.year;
-        //         document.getElementById('meta-type').innerText = project.meta.type;
-        //         document.getElementById('meta-location').innerText = project.meta.location;
-
-        //         document.getElementById('raw-intro').innerHTML = project.introText;
-        //         document.getElementById('raw-detail').innerHTML = project.detailText;
-
-        //         // 6. Build Carousels (Updated for Mixed Media)
-        //         const buildCarousel = (trackId, mediaItems) => {
-        //             const track = document.getElementById(trackId);
-
-        //             mediaItems.forEach(src => {
-        //                 // Use our helper to create the element
-        //                 const mediaElement = createMediaElement(src, 'carousel-img fly-in');
-
-        //                 // Add random initial transform for the fly-in effect
-        //                 const randomX = (Math.random() - 0.5) * 200;
-        //                 const randomY = 100 + Math.random() * 100;
-        //                 mediaElement.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.9)`;
-
-        //                 track.appendChild(mediaElement);
-        //                 flyInObserver.observe(mediaElement);
-        //             });
-        //         };
-
-        //         if (project.carousel1) buildCarousel('track-1', project.carousel1);
-        //         if (project.carousel2) buildCarousel('track-2', project.carousel2);
-
-        //         // 7. Set Next Project Link
-        //         const link = document.getElementById('next-project-link');
-        //         link.innerText = "Next: " + nextProject.title + " ->";
-        //         link.href = `project.html?id=${nextProject.id}`;
-
-        //         // 8. TRIGGER ANIMATIONS
-        //         setTimeout(() => {
-        //             scrambleReveal(document.getElementById('main-title'), project.title, 2000);
-        //         }, 500);
-
-        //         const metas = document.querySelectorAll('.scramble-target');
-        //         metas.forEach((meta, index) => {
-        //             setTimeout(() => {
-        //                 scrambleReveal(meta, meta.innerText, 800);
-        //             }, 800 + (index * 200));
-        //         });
-
-        //         typeWriterIntro('typewriter-intro', 'raw-intro', 10);
-        //         revealTextBlocks('typewriter-detail', 'raw-detail');
-
-        //     } catch (error) {
-        //         console.error("Error loading project data:", error);
-        //     }
-        // }
         // --- UPDATED LOAD PROJECT FUNCTION ---
         async function loadProject() {
             const params = new URLSearchParams(window.location.search);
@@ -648,34 +515,33 @@
             };
 
             // --- HELPER: Parse Meta Content (Handles Links) ---
+            // --- HELPER: Parse Meta Content (Handles Markdown Links & Lists) ---
             const parseMetaContent = (content) => {
-                // Check if content is a list of links (starts with "- ")
-                if (typeof content === 'string' && content.trim().startsWith('-')) {
-                    const items = content.split('-').filter(item => item.trim() !== '');
+                if (typeof content !== 'string') return content;
 
-                    return items.map(item => {
-                        // Extract URL and Text: "- https://google.com Google" or just "- https://google.com"
-                        // Simple regex to find URLs
-                        const urlRegex = /(https?:\/\/[^\s]+)/g;
-                        const match = item.match(urlRegex);
+                // 1. Process Markdown Links first: [Text](URL)
+                let parsed = content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+                    return `<a href="${url}" target="_blank">${text}</a>`;
+                });
 
-                        if (match) {
-                            const url = match[0];
-                            // If there is text after the URL, use it. Otherwise use "Link" or the Domain.
-                            let text = item.replace(url, '').trim();
-                            if (!text) text = "View Link";
-                            return `<a href="${url}" target="_blank">${text}</a><br>`;
-                        }
-                        return item + "<br>";
-                    }).join('');
+                // 2. Process Lists (lines starting with "- ")
+                // We split by "- " only if it is at the start of the string
+                // or preceded by a newline/space, to avoid splitting dashes inside URLs.
+                if (parsed.trim().startsWith('-')) {
+                    // Remove the very first dash
+                    let listContent = parsed.substring(parsed.indexOf('-') + 1);
+
+                    // Split by " - " (dash with spaces) to separate multiple items
+                    // This assumes your JSON list items are separated like "- Item 1 - Item 2"
+                    const items = listContent.split(/(?:^|\s)-\s/);
+
+                    return items
+                        .filter(item => item.trim() !== '')
+                        .map(item => item.trim() + "<br>")
+                        .join('');
                 }
 
-                // Check for explicit HTML anchor tags
-                if (typeof content === 'string' && content.includes('<a href')) {
-                    return content;
-                }
-
-                return content;
+                return parsed;
             };
 
             try {
